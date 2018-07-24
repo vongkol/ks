@@ -1,0 +1,45 @@
+ul.alpha{
+    list-style: none;
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
+ul.alpha li{
+    display: inline;
+    margin-right: 5px;
+}
+ul.alpha li a, ul.alpha li a:link, ul.alpha li a:visited
+{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    background: #ddd;
+}
+ul.alpha li a:hover{
+    color: red;
+    background: #7aca88;
+}
+.ac{
+    color: red;
+    background: #7aca88!important;
+}
+.com-cat {
+    padding: 10px;
+    min-height: 80px;
+}
+.pd-5 {
+    padding: 5px;
+}
+.cl {
+    font-size: 15px;
+    font-weight: 700;
+}
+.company-cat {
+    background: #fff;
+}
+.image-company {
+    line-height: 105px;
+        padding-right: 0;
+}
