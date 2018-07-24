@@ -159,7 +159,7 @@
                                         @foreach($scholarships as $sch)
                                             <div class="col-lg-3 col-md-3 pd-0" style="margin-bottom: 18px;">
                                                 <div class="product-block h-100">
-                                                    <div class="product-img"><a href="{{url('/event/detail/'.$sch->id)}}"><img src="{{asset('uploads/events/featured_image/')}}" alt="" width="100%"></a></div>
+                                                    <div class="product-img"><a href="{{url('/event/detail/'.$sch->id)}}"><img src="{{asset('uploads/scholarships/featured_image/'.$sch->featured_image)}}" alt="" width="100%"></a></div>
                                                     <div class="product-content">
                                                         <h5><a href="#" class="product-title">{{$sch->title}}</h5>
                                                     </div>
