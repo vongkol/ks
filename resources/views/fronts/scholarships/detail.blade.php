@@ -38,13 +38,13 @@
                                                 ->where('scholarship_category', $s->id)
                                                 ->count();  
                                             ?>
-                                                <li><a href="{{url('/scholarship/category/'.$s->id)}}">{{$s->name}} <span class="text-primary">{{$counter2}}</span></a></li>
+                                                <li><a href="{{url('/scholarship/category/'.$s->id)}}">{{$s->name}} <span class="text-danger"> ({{$counter2}})</span></a></li>
                                             @endforeach
                                         </ul>
                                     </li>
                                 @else
                                  <li><a href="{{url('/scholarship/category/'.$c->id)}}"><img src="{{asset('uploads/programs/icon/'.$c->icon)}}" alt=""> {{$c->name}} 
-                                <span class="text-primary"> {{$counter}}</span></a></li>
+                                <span class="text-danger"> ({{$counter}})</span></a></li>
                                 @endif
                             @endforeach
                         </ul>

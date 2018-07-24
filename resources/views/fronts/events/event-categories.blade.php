@@ -36,7 +36,7 @@
                                         <li>
                                             <a href="{{url('/event-list/'.$s->id)}}"> 
                                                 <img src="{{asset('uploads/events/icon/'.$c->icon)}}" width="25" alt="">
-                                                {{$s->name}} <span class="text-info">{{$counter2}}</span>
+                                                {{$s->name}} <span class="text-danger"> ({{$counter2}})</span>
                                             </a>
                                         </li>
                                     @endforeach
@@ -46,7 +46,7 @@
                         <li> 
                             <a href="{{url('/event-list/'.$c->id)}}">
                                 <img src="{{asset('uploads/events/icon/'.$c->icon)}}" width="25" alt="">  
-                                {{$c->name}} <span class="text-info">{{$counter}}</span>
+                                {{$c->name}} <span class="text-danger"> ({{$counter}})</span>
                             </a>
                         </li>
                         @endif

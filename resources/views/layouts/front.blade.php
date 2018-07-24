@@ -85,24 +85,13 @@
                                 <li class="active"><a href="{{url('/')}}">Home</a></li>
                                 <li class="has-sub"><a href="#">Listing</a>
                                     <ul>
-                                        <li><a href="product-list.html">Mobile List</a></li>
-                                        <li><a href="product-single.html">Mobile Single </a></li>
+                                        <li><a href="{{url('/product-listing')}}">Product Listing</a></li>
+                                        <li><a href="{{url('/product/discount')}}">Discount Store </a></li>
                                     </ul>
                                 </li>
                                 <li><a href="{{url('company-category?al=All')}}">Company Listing</a></li>
 
                                 <li><a href="{{url('shop-list/all')}}">Shop Listing</a></li>
-
-                                {{-- <li><a href="#">Corpdiscount</a> --}}
-                                 <!--    <ul>
-                                        <li><a href="checkout.html">Checkout Form</a></li>
-                                        <li><a href="cart.html">Cart</a> </li>
-                                        <li><a href="login-form.html">Login</a> </li>
-                                        <li><a href="signup-form.html">Signup</a> </li>
-                                        <li><a href="404-page.html">404-page</a> </li>
-                                        <li><a href="styleguide.html">styleguide</a> </li>
-                                    </ul> -->
-                                {{-- </li> --}}
                                 <li class="has-sub"><a href="#">Education</a>
                                     <ul>
                                         <li><a href="{{url('/school-list/all')}}">School Listing</a></li>

@@ -33,7 +33,7 @@
                 @foreach($categories as $c)
                     <div class="col-md-2">
                         <div class="categories " align="center" >
-                        <a href="#"><img src="{{asset('uploads/product-categories/'.$c->icon)}}" alt="" width="64"><br>{{$c->name}}</a>
+                        <a href="{{url('/product/category/'.$c->id)}}"><img src="{{asset('uploads/product-categories/'.$c->icon)}}" alt="" width="64"><br>{{$c->name}}</a>
                         </div>
                     </div>
                 @endforeach
@@ -56,14 +56,14 @@
                                     <div class="product-block  h-100">
                                         <div class="product-img"><a href="{{url('product/'.$p->id)}}"><img src="{{asset('uploads/products/featured/'.$p->featured_image)}}" alt="" width="100%"></a></div>
                                         <div class="product-content">
-                                            <h5><a href="#" class="product-title">{{$p->name}}</h5>
+                                            <h5><a href="{{url('product/'.$p->id)}}" class="product-title">{{$p->name}}</h5>
                                             <div class="product-meta"><a href="#" class="product-price">${{$p->price}}</a>
-                                                <a href="#" class="discounted-price">${{$p->sell_price}}</a>
-                                                <span class="offer-price">20%off</span>
+                                                <a href="{{url('product/'.$p->id)}}" class="discounted-price">${{$p->sell_price}}</a>
                                             </div>
                                             <div class="shopping-btn">
-                                                <a href="#" class="product-btn btn-like"><i class="fa fa-heart"></i></a>
-                                                <a href="#" class="product-btn btn-cart"><i class="fa fa-shopping-cart"></i></a>
+                                                {{-- <a href="#" class="product-btn btn-like"><i class="fa fa-heart"></i></a>
+                                                <a href="#" class="product-btn btn-cart"><i class="fa fa-shopping-cart"></i></a> --}}
+                                                <a href="{{url('product/'.$p->id)}}" class="btn btn-primary btn-xs">View Detail</a>
                                             </div>
                                         </div>
                                     </div>
@@ -89,14 +89,12 @@
                                         <div class="product-block h-100">
                                             <div class="product-img"><a href="{{url('product/'.$p->id)}}"><img src="{{asset('uploads/products/featured/'.$p->featured_image)}}" alt="" width="100%"></a></div>
                                             <div class="product-content">
-                                                <h5><a href="#" class="product-title">{{$p->name}}</h5>
-                                                <div class="product-meta"><a href="#" class="product-price">$1100</a>
-                                                    <a href="#" class="discounted-price">$1400</a>
-                                                    <span class="offer-price">20%off</span>
+                                                <h5><a href="{{url('product/'.$p->id)}}" class="product-title">{{$p->name}}</h5>
+                                                <div class="product-meta"><a href="#" class="product-price">${{$p->sell_price}}</a>
+                                                    <a href="#" class="discounted-price">${{$p->price}}</a>
                                                 </div>
                                                 <div class="shopping-btn">
-                                                    <a href="#" class="product-btn btn-like"><i class="fa fa-heart"></i></a>
-                                                    <a href="#" class="product-btn btn-cart"><i class="fa fa-shopping-cart"></i></a>
+                                                   <a href="{{url('product/'.$p->id)}}" class="btn btn-success btn-xs">View Detail</a>
                                                 </div>
                                             </div>
                                         </div>

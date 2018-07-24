@@ -9,6 +9,8 @@ Route::get('/shop-owner/register',"FrontController@register");
 Route::get('/product-list',"FrontController@product_list");
 Route::get('/product-single',"FrontController@product_single");
 Route::get('/product/{id}',"FrontController@product_detail");
+Route::get('/product-listing', "FrontProductController@product_listing");
+Route::get('/product/category/{id}', "FrontProductController@product_category");
 Route::get('/cart',"FrontController@cart");
 Route::get('/checkout',"FrontController@checkout");
 Route::get('/contact',"FrontController@contact");
