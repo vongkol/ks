@@ -17,6 +17,16 @@ class FrontProductController extends Controller
         return view('fronts.products.listing', $data);
 
     }
+    public function baby_listing()
+    {
+        $data['products'] = DB::table('products')
+            ->where('active', 1)
+            ->where('type', 'Baby')
+            ->orderBy('id', 'desc')
+            ->paginate(40);
+        return view('fronts.products.baby', $data);
+
+    }
     public function product_category($id)
     {
         $data['products'] = DB::table('products')
@@ -26,6 +36,17 @@ class FrontProductController extends Controller
             ->paginate(40);
         $data['category'] = DB::table('product_categories')->where('id', $id)->first();
         return view('fronts.products.by-category', $data);
+
+    }
+    public function baby_category($id)
+    {
+        $data['products'] = DB::table('products')
+            ->where('active', 1)
+            ->where('category_id', $id)
+            ->orderBy('id', 'desc')
+            ->paginate(40);
+        $data['category'] = DB::table('product_categories')->where('id', $id)->first();
+        return view('fronts.products.baby-category', $data);
 
     }
 }

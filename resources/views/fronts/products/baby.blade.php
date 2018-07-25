@@ -1,13 +1,14 @@
 @extends('layouts.front')
 @section('content')
     <div class="box-head top-head">
-        <h3 class="head-title text-center"><br>All Products in {{$category->name}}<br>&nbsp;</h3>
+        <h3 class="head-title text-center">Baby Products</h3>
     </div>
     <?php
         $categories = DB::table('product_categories')
             ->where('active', 1)
-            ->orderBy('name')
+            ->where('type', "Baby")
             ->where('parent_id', 0)
+            ->orderBy('name')
             ->get();
     ?>
     <div class="container">
@@ -26,6 +27,7 @@
                         $subs = DB::table('product_categories')
                             ->where('active', 1)
                             ->where('parent_id', $c->id)
+                            ->where('type', "Baby")
                             ->get();
                     ?>
                     @if(count($subs)>0)
@@ -38,13 +40,12 @@
                                     ->where('category_id', $s->id)
                                     ->count();  
                                 ?>
-                                    <li><a href="{{url('/product/category/'.$s->id)}}">{{$s->name}} <span class="text-danger"> ({{$counter2}})</span></a></li>
+                                    <li><a href="{{url('/product/baby/'.$s->id)}}">{{$s->name}} <span class="text-danger"> ({{$counter2}})</span></a></li>
                                 @endforeach
                             </ul>
                         </li>
                     @else
-                     <li><a href="{{url('/product/category/'.$c->id)}}">
-                        {{$c->name}} 
+                     <li><a href="{{url('/product/baby/'.$c->id)}}"> {{$c->name}} 
                     <span class="text-danger"> ({{$counter}})</span></a></li>
                     @endif
                 @endforeach
@@ -54,11 +55,6 @@
 </div>
             <div class="col-lg-9 col-md-9">
                 <div class="row">
-                    @if(count($products)==0)
-                        <div class="col-sm-12">
-                            <h4 class="text-danger">There is no product in this category!</h4>
-                        </div>
-                    @else
                     @foreach($products as $p)
                         <div class="col-lg-4 col-md-4 col-sm-4 mb20 pd-0">
                             <div class="product-block h-100">
@@ -79,9 +75,6 @@
                         </div>
                         </div>
                     @endforeach
-                        
-                    @endif
-                    
                 </div>
                 <div class="row">
                     <div class="col-sm-12">

@@ -148,30 +148,30 @@
         </div>
     </div>
     <div class="container">
-            <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="box">
-                                <div class="box-head">
-                                    <h3 class="head-title">Latest Scholarship</h3>
-                                </div>
-                                <div class="box-body">
-                                    <div class="row">
-                                        @foreach($scholarships as $sch)
-                                            <div class="col-lg-3 col-md-3 pd-0" style="margin-bottom: 18px;">
-                                                <div class="product-block h-100">
-                                                    <div class="product-img"><a href="{{url('/event/detail/'.$sch->id)}}"><img src="{{asset('uploads/scholarships/featured_image/'.$sch->featured_image)}}" alt="" width="100%"></a></div>
-                                                    <div class="product-content">
-                                                        <h5><a href="#" class="product-title">{{$sch->title}}</h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="box">
+                    <div class="box-head">
+                        <h3 class="head-title">Latest Scholarship</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            @foreach($scholarships as $sch)
+                                <div class="col-lg-3 col-md-3 pd-0" style="margin-bottom: 18px;">
+                                    <div class="product-block h-100">
+                                        <div class="product-img"><a href="{{url('/event/detail/'.$sch->id)}}"><img src="{{asset('uploads/scholarships/featured_image/'.$sch->featured_image)}}" alt="" width="100%"></a></div>
+                                        <div class="product-content">
+                                            <h5><a href="#" class="product-title">{{$sch->title}}</h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
     <!-- seller products -->
     <div class="container">
         <div class="row">
@@ -184,27 +184,25 @@
             </div>
         </div>
         <div class="box-body">
-                            <div class="row">
-                            @foreach($schools as $sc)
-                            <div class="col-lg-3 col-md-3 mb20 pd-0">
-                                            <div class="product-block h-100">
-                                                <div class="image-event">
-                                                    <a href="{{url('/school/detail/'.$sc->id)}}" target="_blank">
-                                                        <img src="{{asset('uploads/schools/logo/'.$sc->logo)}}" width="150" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="product-content">
-                                                <h5><a href="{{url('/school/detail/'.$sc->id)}}" class="product-title">{{$sc->name_english}}</a></h5>
-                                                <div class="product-meta">
-                                                    {{$sc->name_khmer}}
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                @endforeach
+            <div class="row">
+                @foreach($schools as $sc)
+                    <div class="col-lg-3 col-md-3 mb20 pd-0">
+                        <div class="product-block h-100">
+                                <div class="image-event">
+                                    <a href="{{url('/school/detail/'.$sc->id)}}" target="_blank">
+                                        <img src="{{asset('uploads/schools/logo/'.$sc->logo)}}" width="150" alt="">
+                                    </a>
+                                </div>
+                                <div class="product-content">
+                                <h5><a href="{{url('/school/detail/'.$sc->id)}}" class="product-title">{{$sc->name_english}}</a></h5>
+                                <div class="product-meta">
+                                    {{$sc->name_khmer}}
+                                </div>
                             </div>
-                      
-        
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
     <!-- /.seller products -->

@@ -100,9 +100,9 @@
                                     </ul>
                                 </li>
                                 <li><a href="{{url('/event/all')}}">Event</a>
-                                <li><a href="template-feature.html">Babyzone</a>
+                                <li><a href="{{url('/product-baby')}}">Babyzone</a>
                                 </li>
-                                <li><a href="about.html">Career</a>
+                                <li><a href="#">Career</a>
                                 <li><a href="{{url('/review')}}">Review</a>
                             </ul>
                         </div>

@@ -6,8 +6,9 @@
     <?php
         $categories = DB::table('product_categories')
             ->where('active', 1)
-            ->orderBy('name')
+            ->where('type', 'Baby')
             ->where('parent_id', 0)
+            ->orderBy('name')
             ->get();
     ?>
     <div class="container">
@@ -25,6 +26,7 @@
                         ->count();
                         $subs = DB::table('product_categories')
                             ->where('active', 1)
+                            ->where('type', 'Baby')
                             ->where('parent_id', $c->id)
                             ->get();
                     ?>
@@ -38,12 +40,12 @@
                                     ->where('category_id', $s->id)
                                     ->count();  
                                 ?>
-                                    <li><a href="{{url('/product/category/'.$s->id)}}">{{$s->name}} <span class="text-danger"> ({{$counter2}})</span></a></li>
+                                    <li><a href="{{url('/product/baby/'.$s->id)}}">{{$s->name}} <span class="text-danger"> ({{$counter2}})</span></a></li>
                                 @endforeach
                             </ul>
                         </li>
                     @else
-                     <li><a href="{{url('/product/category/'.$c->id)}}">
+                     <li><a href="{{url('/product/baby/'.$c->id)}}">
                         {{$c->name}} 
                     <span class="text-danger"> ({{$counter}})</span></a></li>
                     @endif
