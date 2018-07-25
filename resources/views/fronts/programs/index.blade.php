@@ -31,7 +31,7 @@
                                 ?>
                                 @if(count($subs)>0)
                                     <li class="has-sub">
-                                        <a href="#"><img src="{{asset('uploads/programs/icon/'.$c->icon)}}" alt=""> {{$c->name}}</a>
+                                        <a href="#">{{$c->name}}</a>
                                         <ul>
                                             @foreach($subs as $s)
                                             <?php   $counter2 = DB::table('school_programs')
@@ -43,7 +43,8 @@
                                         </ul>
                                     </li>
                                 @else
-                                 <li><a href="{{url('/school-program/category/'.$c->id)}}"><img src="{{asset('uploads/programs/icon/'.$c->icon)}}" alt=""> {{$c->name}} <span class="text-primary">{{$counter}}</span></a></li>
+                                 <li><a href="{{url('/school-program/category/'.$c->id)}}">
+                                    {{$c->name}} <span class="text-primary">{{$counter}}</span></a></li>
                                 @endif
                             @endforeach
                         </ul>

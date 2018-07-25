@@ -22,7 +22,8 @@
                         ?>
                             @if(count($subs)>0)
                                 <li class="has-sub">
-                                    <a href="#"><img src="{{asset('uploads/schools/icon/'.$e->icon)}}" width="25" alt="">  {{$e->name}}</a>
+                                    <a href="#">
+                                        {{$e->name}}</a>
                                     <ul>
                                         @foreach($subs as $s)
                                             <?php $counter2 = DB::table('schools')
@@ -32,7 +33,6 @@
                                             ?>
                                             <li>
                                                 <a href="{{url('/school-list/'.$s->id)}}">
-                                                    <img src="{{asset('uploads/schools/icon/'.$e->icon)}}" width="25" alt="">
                                                     {{$s->name}} <span class="text-info">{{$counter2}}</span>
                                                 </a>
                                             </li>
@@ -42,7 +42,6 @@
                             @else
                                 <li>
                                     <a href="{{url('/school-list/'.$e->id)}}"> 
-                                        <img src="{{asset('uploads/schools/icon/'.$e->icon)}}" width="25" alt=""> 
                                         {{$e->name}}  <span class="text-info">{{$counter}}</span>
                                     </a>
                                 </li>

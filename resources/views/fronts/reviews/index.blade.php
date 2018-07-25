@@ -26,7 +26,8 @@
                                 ?>
                                 @if(count($subs)>0)
                                     <li class="has-sub">
-                                        <a href="#"><img src="{{asset('uploads/reviews/icon/'.$c->icon)}}" width="25" alt="">  {{$c->name}}</a>
+                                        <a href="#">
+                                            {{$c->name}}</a>
                                         <ul>
                                             @foreach($subs as $s)
                                                 <li><a href="{{url('/review/category/'.$s->id)}}"><img src="{{asset('uploads/reviews/icon/'.$c->icon)}}" width="25" alt=""> {{$s->name}}</a></li>
@@ -34,7 +35,8 @@
                                         </ul>
                                     </li>
                                 @else
-                                 <li><a href="{{url('/review/category/'.$c->id)}}"><img src="{{asset('uploads/reviews/icon/'.$c->icon)}}" width="25" alt="">  {{$c->name}}</a></li>
+                                 <li><a href="{{url('/review/category/'.$c->id)}}">
+                                    {{$c->name}}</a></li>
                                 @endif
                             @endforeach
                         </ul>

@@ -86,7 +86,7 @@
                                 <li class="has-sub"><a href="#">Listing</a>
                                     <ul>
                                         <li><a href="{{url('/product-listing')}}">Product Listing</a></li>
-                                        <li><a href="{{url('/product/discount')}}">Discount Store </a></li>
+                                        {{-- <li><a href="{{url('/product/discount')}}">Discount Store </a></li> --}}
                                     </ul>
                                 </li>
                                 <li><a href="{{url('company-category?al=All')}}">Company Listing</a></li>
@@ -107,12 +107,10 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- /.navigations-->
                 </div>
             </div>
         </div>
     </div>
-    <!-- /. header-section-->
     
     @yield('content')
     <!-- footer -->
