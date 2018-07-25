@@ -18,6 +18,11 @@
     <!-- FontAwesome CSS -->
     <link href="{{asset('front/css/font-awesome.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('front/css/custom.css')}}">
+    <style>
+        .ownermenu{
+            background: #ccc;
+        }
+    </style>
 </head>
 
 <body>
@@ -59,13 +64,13 @@
                 </div>
                 <!-- /.search -->
                 <!-- account -->
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="display: none">
                     <div class="account-section">
                         <ul>
                             <li><a href="{{url('shop-owner/login')}}" class="title hidden-xs">Login</a></li>
                             <li class="hidden-xs">|</li>
                             <li><a href="{{url('shop-owner/register')}}" class="title hidden-xs">Register</a></li>
-                            <li style="display: none"><a href="#" class="title"><i class="fa fa-shopping-cart"></i>   <sup class="cart-quantity">1</sup></a>
+                            <li><a href="#" class="title"><i class="fa fa-shopping-cart"></i>   <sup class="cart-quantity">1</sup></a>
                             </li>
                         </ul>
                     </div>
@@ -86,7 +91,7 @@
                                 <li class="has-sub"><a href="#">Listing</a>
                                     <ul>
                                         <li><a href="{{url('/product-listing')}}">Product Listing</a></li>
-                                        <li><a href="{{url('/product/best-selling')}}">Best Selling </a></li>
+                                        {{-- <li><a href="{{url('/product/discount')}}">Discount Store </a></li> --}}
                                     </ul>
                                 </li>
                                 <li><a href="{{url('company-category?al=All')}}">Company Listing</a></li>
@@ -104,15 +109,11 @@
                                 </li>
                                 <li><a href="#">Career</a>
                                 <li><a href="{{url('/review')}}">Review</a>
-                                @if(Session::has('user'))
                                 <li class="has-sub">
-                                    <a href="#" class="text-danger">{{session('user')->first_name . ' ' . session('user')->last_name}}</a>
+                                    <a href="#">{{session('user')->first_name . ' ' . session('user')->last_name}}</a>
                                     <ul>
                                         <li>
                                             <a href="{{url('/owner/profile')}}">My Profile</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Reset Password</a>
                                         </li>
                                         <li>
                                             <a href="#">My Shop</a>
@@ -120,12 +121,8 @@
                                         <li>
                                             <a href="#">My Product</a>
                                         </li>
-                                        <li>
-                                            <a href="{{url('/owner/logout')}}">Logout</a>
-                                        </li>
                                     </ul>
                                 </li>
-                                @endif
                             </ul>
                         </div>
                     </div>
@@ -134,7 +131,23 @@
         </div>
     </div>
     
-    @yield('content')
+    <div class="content bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="ownermenu">
+                        <h3 class="text-primary">Shop Owner Menu</h3>
+                        <ul>
+                            <li><a href="#">My Profile</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- footer -->
     <div class="footer">
         <div class="container">
@@ -258,16 +271,6 @@
     });
     </script>
 
-    {{-- <script type="text/javascript">
-        $(function () {
- 
-        $("#rateYo").rateYo({
-            rating: 3.6,
-            starWidth: "16px"
-        });
-        
-        });
-    </script> --}}
     @yield('js')
 </body>
 

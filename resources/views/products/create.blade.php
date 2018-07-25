@@ -55,6 +55,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="best" class="control-label col-sm-3 lb">Best Sell</label>
+                            <div class="col-sm-9">
+                                <select name="best" id="best" class="form-control">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="shop" class="control-label col-sm-3 lb">Shop Name<span class="text-danger">*</span></label>
                             <div class="col-sm-9">
                                 <select name="shop" id="shop" class="form-control">

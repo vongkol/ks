@@ -6,17 +6,19 @@
 Route::get('/',"FrontController@index");
 Route::get('/front/login',"FrontController@login");
 // shop owner
-Route::get('/owner', function(){
-    return "Hello";
-});
+Route::get('/owner/profile', "FrontShopOwnerController@profile");
+Route::get('/owner/profile/edit', "FrontShopOwnerController@edit_profile");
+Route::post('/owner/profile/update', "FrontShopOwnerController@update_profile");
+Route::get('/owner/logout', "FrontShopOwnerController@logout");
 Route::get('/shop-owner/register',"FrontController@register");
 Route::post('/owner/register', "FrontShopOwnerController@do_register");
 Route::post('/owner/do-login', "FrontShopOwnerController@do_login");
 Route::get('/confirm/{id}', "FrontShopOwnerController@confirm");
 Route::view('/test', 'fronts.owners.confirm');
-
+// product
 Route::get('/product-list',"FrontController@product_list");
 Route::get('/product-single',"FrontController@product_single");
+Route::get('/product/best-selling', "FrontProductController@best_selling");
 Route::get('/product/{id}',"FrontController@product_detail");
 Route::get('/product-listing', "FrontProductController@product_listing");
 Route::get('/product-baby', "FrontProductController@baby_listing");

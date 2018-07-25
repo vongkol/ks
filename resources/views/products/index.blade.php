@@ -13,6 +13,7 @@
                     <th>Price</th>
                     <th>Sale Price</th>
                     <th>Category</th>
+                    <th>Best Sell</th>
                     <th>Photo</th>
                     <th>Actions</th>
                 </tr>
@@ -33,6 +34,9 @@
                         <td>$ {{$c->price}}</td>
                         <td>$ {{$c->sell_price}}</td>
                         <td>{{$c->cname}}</td>
+                        <td>
+                            {{$c->best_sell==0?'No':'Yes'}}
+                        </td>
                         <td><img src="{{asset('uploads/products/featured/'.$c->featured_image)}}" alt="" width="25"></td>
                         <td>
                             <a href="{{url('/admin/product/detail/'.$c->id)}}" title="Detail"><i class="fa fa-eye"></i></a>&nbsp;

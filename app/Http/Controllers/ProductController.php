@@ -60,7 +60,8 @@ class ProductController extends Controller
             'type' => $r->type,
             'quantity' => $r->quantity,
             'short_description' => $r->short_description,
-            'description' => $r->description
+            'description' => $r->description,
+            'best_sell' => $r->best
         );
         $i = DB::table('products')->insertGetId($data);
         if($i)
@@ -122,7 +123,8 @@ class ProductController extends Controller
             'type' => $r->type,
             'quantity' => $r->quantity,
             'short_description' => $r->short_description,
-            'description' => $r->description
+            'description' => $r->description,
+            'best_sell' => $r->best
         );
         if($r->hasFile('photo'))
         {

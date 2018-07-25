@@ -49,4 +49,14 @@ class FrontProductController extends Controller
         return view('fronts.products.baby-category', $data);
 
     }
+    public function best_selling()
+    {
+        $data['products'] = DB::table('products')
+            ->where('active', 1)
+            ->where('best_sell', 1)
+            ->orderBy('id', 'desc')
+            ->paginate(40);
+        return view('fronts.products.best-selling', $data);
+
+    }
 }

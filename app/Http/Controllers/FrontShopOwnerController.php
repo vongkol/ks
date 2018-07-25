@@ -126,7 +126,7 @@ EOT;
                 // save user to session
                 $r->session()->put('user', $user);
               
-                return redirect('/owner');
+                return redirect('/owner/profile');
             }
             else{
                 $r->session()->flash('sms1', "Invalid email or password!");
@@ -137,5 +137,61 @@ EOT;
             $r->session()->flash('sms1', "Invalid username or password!");
             return redirect('/shop-owner/login');
         }
+    }
+    public function profile(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['user'] = $user;
+        return view('fronts.owners.profile', $data);
+    }
+    public function edit_profile(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['user'] = DB::table('shop_owners')->where('id',$user->id)->first();
+        return view('fronts.owners.edit-profile', $data);
+    }
+    public function update_profile(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data = array(
+            'first_name' => $r->first_name,
+            'last_name' => $r->last_name,
+            'gender' => $r->gender,
+            'email' => $r->email,
+            'phone' => $r->phone,
+            'address' => $r->address,
+            'username' => $r->username
+        );
+        if($r->hasFile('photo'))
+        {
+            $file = $r->file('photo');
+            $file_name = $file->getClientOriginalName();
+            $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
+            $file_name = 'photo'.date('d') .$r->id . $ss;
+            $destinationPath = 'uploads/shop_owners/profile/'; 
+            $file->move($destinationPath, $file_name);
+            $data['photo'] = $file_name;
+        }
+        $i = DB::table('shop_owners')->where('id', $r->id)->update($data);
+        $r->session()->flash('sms', 'Your profile has been updated!');
+        return redirect('/owner/profile/edit');
+    }
+    public function logout(Request $request)
+    {
+        $request->session()->forget('user');
+        $request->session()->flush();
+        return redirect('/');
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 24, 2018 at 09:14 AM
+-- Generation Time: Jul 25, 2018 at 08:30 PM
 -- Server version: 10.1.26-MariaDB-0+deb9u1
 -- PHP Version: 7.2.7-1+0~20180622080745.23+stretch~1.gbpfd8e2e
 
@@ -251,22 +251,23 @@ CREATE TABLE `products` (
   `active` tinyint(4) NOT NULL DEFAULT '1',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `quantity` int(11) DEFAULT NULL,
-  `type` varchar(30) DEFAULT 'General'
+  `type` varchar(30) DEFAULT 'General',
+  `best_sell` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `category_id`, `shop_id`, `price`, `sell_price`, `featured_image`, `short_description`, `description`, `active`, `create_at`, `quantity`, `type`) VALUES
-(1, 'OnePlus 6', 3, 1, 560, 550, 'pro1.jpg', 'OnePlus 6 is the Android phone for 2018.', '<p>Put some description of your phone here...</p>', 1, '2018-06-18 03:14:01', 20, 'General'),
-(2, 'McBook Pro 2017', 12, 1, 2900, 2500, 'pro2.jpg', 'The best laptop from Apple this year.', '<p>This is the mc book pro 2017, the best laptop from apple ever made over the past decade.</p>', 0, '2018-06-21 02:55:37', 30, 'General'),
-(3, 'iPhone 8 Plus', 1, 1, 800, 700, 'pro3.jpg', 'some description', '<p>I phone</p>', 1, '2018-07-03 12:12:57', 1, 'General'),
-(4, 'Test Product', 4, 2, 800, 680, 'pro4.jpg', 'sdfsfsdfsd', '<p>sdfsadfsadf</p>', 1, '2018-07-03 12:21:14', 1, 'General'),
-(5, 'OPPO F7', 1, 1, 600, 300, 'pro5.jpg', 'some description', '<p>Some description working!</p>', 1, '2018-07-03 12:23:54', 1, 'Baby'),
-(6, 'Iphone 8', 1, 2, 200, 150, 'pro6.jpg', 'test', '<p>test</p>', 1, '2018-07-06 06:15:57', 1, 'General'),
-(7, 'Phone 6', 4, 2, 0, 0, 'pro7.jpg', '1', '<p>test</p>', 1, '2018-07-06 06:19:27', 1, 'Baby'),
-(8, 'Sample Baby Pro', 4, 1, 70, 50, 'pro8.jpg', 'This is the sample product.', '<p>This is the sample product for baby shop!</p>', 1, '2018-07-21 09:29:27', 10, 'Baby');
+INSERT INTO `products` (`id`, `name`, `category_id`, `shop_id`, `price`, `sell_price`, `featured_image`, `short_description`, `description`, `active`, `create_at`, `quantity`, `type`, `best_sell`) VALUES
+(1, 'OnePlus 6', 3, 1, 560, 550, 'pro1.jpg', 'OnePlus 6 is the Android phone for 2018.', '<p>Put some description of your phone here...</p>', 1, '2018-06-18 03:14:01', 20, 'General', 1),
+(2, 'McBook Pro 2017', 12, 1, 2900, 2500, 'pro2.jpg', 'The best laptop from Apple this year.', '<p>This is the mc book pro 2017, the best laptop from apple ever made over the past decade.</p>', 0, '2018-06-21 02:55:37', 30, 'General', NULL),
+(3, 'iPhone 8 Plus', 1, 1, 800, 700, 'pro3.jpg', 'some description', '<p>I phone</p>', 1, '2018-07-03 12:12:57', 1, 'General', 1),
+(4, 'Test Product', 4, 2, 800, 680, 'pro4.jpg', 'sdfsfsdfsd', '<p>sdfsadfsadf</p>', 1, '2018-07-03 12:21:14', 1, 'General', NULL),
+(5, 'OPPO F7', 1, 1, 600, 300, 'pro5.jpg', 'some description', '<p>Some description working!</p>', 1, '2018-07-03 12:23:54', 1, 'Baby', NULL),
+(6, 'Iphone 8', 1, 2, 200, 150, 'pro6.jpg', 'test', '<p>test</p>', 1, '2018-07-06 06:15:57', 1, 'General', 1),
+(7, 'Phone 6', 4, 2, 0, 0, 'pro7.jpg', '1', '<p>test</p>', 1, '2018-07-06 06:19:27', 1, 'Baby', 1),
+(8, 'Sample Baby Pro', 4, 1, 70, 50, 'pro8.jpg', 'This is the sample product.', '<p>This is the sample product for baby shop!</p>', 1, '2018-07-21 09:29:27', 10, 'Baby', NULL);
 
 -- --------------------------------------------------------
 
@@ -290,7 +291,7 @@ CREATE TABLE `product_categories` (
 
 INSERT INTO `product_categories` (`id`, `name`, `active`, `create_at`, `parent_id`, `icon`, `type`) VALUES
 (1, 'Smart Phone', 1, '2018-04-07 02:50:56', 0, '1if_12_939749.png', 'General'),
-(2, 'iPad', 1, '2018-04-07 02:51:18', 0, '2if_27_939733.png', 'General'),
+(2, 'iPad', 1, '2018-04-07 02:51:18', 15, '2if_27_939733.png', 'General'),
 (3, 'OnePlus', 1, '2018-04-07 02:51:50', 0, '3if_30_939730.png', 'General'),
 (4, 'Baby Powder', 1, '2018-04-07 02:52:06', 0, '4if_14_939747.png', 'Baby'),
 (5, 'Sumsung', 1, '2018-04-07 02:52:13', 0, '5if_8_939753.png', 'General'),
@@ -300,9 +301,10 @@ INSERT INTO `product_categories` (`id`, `name`, `active`, `create_at`, `parent_i
 (9, 'Desktop', 1, '2018-06-21 02:40:41', 0, '9if_14_939747.png', 'General'),
 (10, 'Laptop Lenovo', 1, '2018-06-21 02:40:59', 0, '10if_8_939753.png', 'General'),
 (11, 'Dell Server', 1, '2018-06-21 02:41:37', 0, '11if_27_939733.png', 'General'),
-(12, 'McBook Pro', 1, '2018-06-21 02:41:59', 0, '12if_27_939733.png', 'General'),
+(12, 'McBook Pro', 1, '2018-06-21 02:41:59', 15, '12if_27_939733.png', 'General'),
 (13, 'Mini Mart', 1, '2018-06-21 02:42:32', 0, '13if_14_939747.png', 'General'),
-(14, 'Restaurants', 1, '2018-06-21 02:42:44', 0, '14if_shop_house-home_2222735.png', 'General');
+(14, 'Restaurants', 1, '2018-06-21 02:42:44', 0, '14if_shop_house-home_2222735.png', 'General'),
+(15, 'Apple Products', 1, '2018-07-24 08:50:01', 0, '13if_14_939747.png', 'General');
 
 -- --------------------------------------------------------
 
@@ -532,9 +534,9 @@ CREATE TABLE `scholarship_categories` (
 --
 
 INSERT INTO `scholarship_categories` (`id`, `name`, `active`, `create_at`, `parent_id`, `icon`) VALUES
-(1, '1', 1, '2018-07-08 08:08:48', 0, 'default.png'),
-(2, '2', 1, '2018-07-08 08:09:01', 0, 'default.png'),
-(3, '3', 1, '2018-07-08 08:09:09', 2, 'default.png');
+(1, 'RUPP Scholarship', 1, '2018-07-08 08:08:48', 0, 'default.png'),
+(2, 'Scholarship in Cambodia', 1, '2018-07-08 08:09:01', 0, 'default.png'),
+(3, 'Local Scholarship', 1, '2018-07-08 08:09:09', 2, 'default.png');
 
 -- --------------------------------------------------------
 
@@ -716,8 +718,8 @@ CREATE TABLE `shop_owners` (
 --
 
 INSERT INTO `shop_owners` (`id`, `first_name`, `last_name`, `gender`, `email`, `phone`, `photo`, `address`, `username`, `password`, `is_verified`, `active`, `create_at`) VALUES
-(1, 'HENG', 'Vongkol', 'male', 'hengvongkol@gmail.com', '986 397 627', 'default.png', 'Phnom Penh, Cambodia', 'vongkol', '$2y$10$JJHFw4arXBC.ar9qJSPlkeqAsPLXtzPnN6/M19YGZMzkfWKemUQbe', 0, 1, '2018-04-07 02:23:06'),
-(2, 'test1', 'test', 'male', 'test@gmail.com', 'test', '2vdoo.png', 'test', 'test', '$2y$10$qWQlqTg8GqvHPget/gRCd.zjABCuCA2p9qiCyQ8suA9wgVr6LvJnO', 0, 1, '2018-05-06 07:46:06');
+(1, 'HENG', 'Vongkol', 'Male', 'hengvongkol@gmail.com', '017 837754', 'photo251.png', 'Phnom Penh, Cambodia', 'vongkol', '$2y$10$XZzS1DYEvhpew5TVvSGaPezFn60oVYmNEUF2jxXM9S5t131XKq1iy', 1, 0, '2018-07-25 09:00:49'),
+(2, 'pachak', 'men', 'Male', 'pachak.men@gmail.com', '0962831557', 'default.png', NULL, 'pachak', '$2y$10$/2dOdpU8ESlbmSNhGpRgv.H.7X.JQVHbw3To2cjo9QhYdiKR.0afS', 0, 0, '2018-07-25 12:40:02');
 
 -- --------------------------------------------------------
 
@@ -745,9 +747,9 @@ INSERT INTO `slides` (`id`, `name`, `photo`, `create_at`, `active`, `order`, `ur
 (2, 'test', '', '2018-05-07 02:15:06', 0, NULL, NULL, NULL),
 (3, 'test24', '', '2018-05-07 02:15:33', 0, NULL, NULL, NULL),
 (4, 'test', '251097062678359.jpg', '2018-05-07 02:19:19', 0, 1, 'test', '1'),
-(5, 'Iphone 8 Plus', 'slider_3.jpg', '2018-05-07 02:20:25', 1, 1, 'https://www.facebook.com/', '5.5 inch Retina HD Display | 12MP wide-angle cameras'),
+(5, 'Iphone 8 Plus', 'slider_3.jpg', '2018-05-07 02:20:25', 1, 1, '#', '5.5 inch Retina HD Display | 12MP wide-angle cameras'),
 (6, 'test', 'WWW.YIFY-TORRENTS.COM.jpg', '2018-05-07 02:28:18', 0, 1, '11111', 'test'),
-(7, 'Red Mi Y1', 'slider_2.jpg', '2018-05-07 02:31:41', 1, 2, 'https://www.facebook.com/', 'LED Selfie-light | Fingerprint sensor | Dedicated microSD card slot Snapdragon 435 octa-core processor');
+(7, 'Red Mi Y1', 'slider_2.jpg', '2018-05-07 02:31:41', 1, 2, '#', 'LED Selfie-light | Fingerprint sensor | Dedicated microSD card slot Snapdragon 435 octa-core processor');
 
 -- --------------------------------------------------------
 
@@ -1004,7 +1006,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_categories`
 --
 ALTER TABLE `product_categories`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `product_photos`
