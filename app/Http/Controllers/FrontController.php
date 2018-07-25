@@ -47,7 +47,7 @@ class FrontController extends Controller
     }
 
     public function login(){
-        return view('login');
+        return view('fronts.owners.login');
     }
 
     public function product_list(){

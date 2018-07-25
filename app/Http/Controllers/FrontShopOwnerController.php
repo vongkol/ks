@@ -53,10 +53,10 @@ class FrontShopOwnerController extends Controller
     }
 
     public function register(){
-        return view('register');
+        return view('fronts.owners.register');
     }
 
     public function login(){
-        return view('login');
+        return view('fronts.owners.login');
     }
 }

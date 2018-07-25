@@ -59,7 +59,7 @@
                 </div>
                 <!-- /.search -->
                 <!-- account -->
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="display: none">
                     <div class="account-section">
                         <ul>
                             <li><a href="{{url('shop-owner/login')}}" class="title hidden-xs">Login</a></li>
@@ -182,8 +182,8 @@
                                 <li><a href="#"><i class="fa fa-cc-discover fa-2x"></i></a></li>
                             </ul>
                         </div>
-                        <p class="alignright">Copyright © All Rights Reserved 2018 Template Design by
-                            <a href="http://vdoo.biz/" target="_blank" class="copyrightlink">Vdoo Solutions</a></p>
+                        <p class="alignright">Powered by
+                            <a href="http://vdoo.biz/" target="_blank" class="copyrightlink">Vdoo Freelance Team</a></p>
                     </div>
                 </div>
             </div>
