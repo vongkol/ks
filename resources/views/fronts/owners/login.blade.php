@@ -4,32 +4,43 @@
         <div class="container">
             <div class="box">
                 <div class="row">
-                    <div class="col-lg-5 col-md-5"> 
-                        <h3 class="mb10">Login</h3>
-                        <!-- form -->
-                        <form>
-                            <div class="form-group">
-                                <label class="control-label sr-only" for="email"></label>
-                                <div class="login-input">
-                                    <input id="email" name="emaol" type="text" class="form-control" placeholder="Enter your email id"  required>
-                                    <div class="login-icon"><i class="fa fa-user"></i></div>
+                    <div class="col-sm-7"> 
+                        <h3 class="mb10">Shop Owner Login</h3>
+                        <hr>
+                        @if(Session::has('sms1'))
+                            <div class="alert alert-danger" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div>
+                                    {{session('sms1')}}
                                 </div>
                             </div>
-                    
-                        
-                            <div class="form-group">
-                                <label class="control-label sr-only"></label>
-                                <div class="login-input">
-                                    <input name="password" type="password" class="form-control" placeholder="******"  required>
-                                    <div class="login-icon"><i class="fa fa-lock"></i></div>
+                        @endif
+                        <form action="{{url('/owner/do-login')}}" method="POST" class="form-horizontal">
+                            {{csrf_field()}}
+                            <div class="form-group row">
+                                <label class="control-label col-sm-3" for="username">Username <span class="text-danger">*</span></label>
+                                <div class="col-sm-9">
+                                    <input id="username" name="username" type="text" class="form-control" required>
                                 </div>
                             </div>
-                        
-                
-                            <button class="btn btn-info btn-block mb10">Sign In</button>
-                            <div>
-                                <p>You have don't have an account yet? <a href="{{url('/shop-owner/register')}}" class="text-danger">Click here to sign up!</a></p>
+                            <div class="form-group row">
+                                <label class="control-label col-sm-3">Password <span class="text-danger">*</span></label>
+                                <div class="col-sm-9">
+                                    <input name="password" type="password" class="form-control" required>
+                                </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="" class="control-label col-sm-3">&nbsp;</label>
+                                <div class="col-sm-9">
+                                    <button class="btn btn-info btn-block mb10" type="submit">Sign In</button>
+                                    <div>
+                                        <p>You have don't have an account yet? <a href="{{url('/shop-owner/register')}}" class="text-danger">Click here to sign up!</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                           
                         </form>
                     </div>
                 </div>

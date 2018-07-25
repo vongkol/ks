@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use DB;
 use Auth;
-
+use PHPMailer\PHPMailer\PHPMailer;
 class Right
 {
     public static function check($permission_name, $action) {
@@ -32,14 +32,78 @@ class Right
 	   
        	return ($q->count() > 0?'1':'0');
     }
-    public static function branch($id)
+    public static function sms($to, $message)
     {
-        $arr = array();
-        $data = DB::table('user_branches')->where('user_id', $id)->get();
-        foreach($data as $b)
-        {
-            array_push($arr, $b->branch_id);
+        $mail = new PHPMailer(true); // notice the \  you have to use root namespace here
+        try {
+            $mail->isSMTP(); // tell to use smtp
+            $mail->CharSet = "utf-8"; // set charset to utf8
+            $mail->SMTPAuth = true;  // use smpt auth
+            $mail->SMTPSecure = "ssl"; // or ssl
+            $mail->Host = "gator4170.hostgator.com";
+            $mail->Port = 465; 
+            $mail->Username = "sales@bill-trade.com";
+            $mail->Password = "Khmer@123";
+            $mail->setFrom("sales@bill-trade.com", "KSPage");
+            $mail->Subject = "Confirm Your Registration";
+            $mail->MsgHTML($message);
+            $mail->addAddress($to, $to);
+            $mail->send();
+        } catch (phpmailerException $e) {
+//            dd($e);
+        } catch (Exception $e) {
+//            dd($e);
         }
-        return $arr;
+        return 1;
     }
+    public static function send_email($to, $subject, $message)
+    {
+        $mail = new PHPMailer(true); 
+        try {
+            $mail->isSMTP(); 
+            $mail->CharSet = "utf-8"; 
+            $mail->SMTPAuth = true; 
+            $mail->SMTPSecure = "ssl";
+            $mail->Host = "gator4170.hostgator.com";
+            $mail->Port = 465; 
+            $mail->Username = "sales@bill-trade.com";
+            $mail->Password = "Khmer@123";
+            $mail->setFrom("sales@bill-trade.com", "sales@bill-trade.com");
+            $mail->Subject = $subject;
+            $mail->MsgHTML($message);
+            $mail->addAddress($to, $to);
+            $mail->send();
+        } catch (phpmailerException $e) {
+//            dd($e);
+        } catch (Exception $e) {
+//            dd($e);
+        }
+        return 1;
+    }
+    public static function send_email_membership($send_to, $id)
+    {
+        $a = url('/membership/service/reset/'.$id);
+        $mail = new PHPMailer(true); // notice the \  you have to use root namespace here
+        try {
+            $mail->isSMTP(); // tell to use smtp
+            $mail->CharSet = "utf-8"; // set charset to utf8
+            $mail->SMTPAuth = true;  // use smpt auth
+            $mail->SMTPSecure = "ssl"; // or ssl
+            $mail->Host = "gator4170.hostgator.com";
+            $mail->Port = 465; // most likely something different for you. This is the mailtrap.io port i use for testing.
+            $mail->Username = "sales@bill-trade.com";
+            $mail->Password = "Khmer@123";
+            $mail->setFrom("sales@bill-trade.com", "sales@bill-trade.com");
+            $mail->Subject = "Reset Your Password";
+            $mail->MsgHTML("<p>Please click the link below to reset your password.</p><p><a href='{$a}'>{$a}</a></p>");
+            $mail->addAddress($send_to, $send_to);
+            $mail->send();
+        } catch (phpmailerException $e) {
+           dd($e);
+        } catch (Exception $e) {
+           dd($e);
+        }
+        return 1;
+    }
+    
 }
