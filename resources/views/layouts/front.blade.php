@@ -112,7 +112,7 @@
                                             <a href="{{url('/owner/profile')}}">My Profile</a>
                                         </li>
                                         <li>
-                                            <a href="#">Reset Password</a>
+                                            <a href="{{url('/owner/reset-password')}}">Reset Password</a>
                                         </li>
                                         <li>
                                             <a href="#">My Shop</a>

@@ -194,4 +194,36 @@ EOT;
         $request->session()->flush();
         return redirect('/');
     }
+    public function reset(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['user'] = DB::table('shop_owners')->where('id',$user->id)->first();
+        return view('fronts.owners.reset', $data);
+    }
+    public function reset_password(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        if($r->pass==$r->cpass)
+        {
+            $data = array(
+                'password' => bcrypt($r->pass)
+            );
+            $i = DB::table('shop_owners')->where('id', $r->id)->update($data);
+            $r->session()->flash('sms', 'Your password has been reset successfully!');
+            return redirect('/owner/reset-password');
+        }
+        else{
+            $r->session()->flash('sms1', 'New password and confirm password is not matched!');
+            return redirect('/owner/reset-password');
+        }
+
+    }
 }

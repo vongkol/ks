@@ -13,6 +13,8 @@ Route::get('/owner/logout', "FrontShopOwnerController@logout");
 Route::get('/shop-owner/register',"FrontController@register");
 Route::post('/owner/register', "FrontShopOwnerController@do_register");
 Route::post('/owner/do-login', "FrontShopOwnerController@do_login");
+Route::get('/owner/reset-password', "FrontShopOwnerController@reset");
+Route::post('/owner/reset-password/update', "FrontShopOwnerController@reset_password");
 Route::get('/confirm/{id}', "FrontShopOwnerController@confirm");
 Route::view('/test', 'fronts.owners.confirm');
 // product
