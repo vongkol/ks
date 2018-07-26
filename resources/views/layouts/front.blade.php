@@ -115,7 +115,7 @@
                                             <a href="{{url('/owner/reset-password')}}">Reset Password</a>
                                         </li>
                                         <li>
-                                            <a href="#">My Shop</a>
+                                            <a href="{{url('/owner/shop')}}">My Shop</a>
                                         </li>
                                         <li>
                                             <a href="#">My Product</a>

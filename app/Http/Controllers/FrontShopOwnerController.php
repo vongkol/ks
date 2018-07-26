@@ -204,6 +204,35 @@ EOT;
         $data['user'] = DB::table('shop_owners')->where('id',$user->id)->first();
         return view('fronts.owners.reset', $data);
     }
+    public function shop(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['user'] = DB::table('shop_owners')->where('id',$user->id)->first();
+        $data['shop'] = DB::table('shops')
+            ->join('shop_categories', 'shops.shop_category', 'shop_categories.id')
+            ->where('shops.shop_owner', $user->id)
+            ->where('shops.active', 1)
+            ->select('shops.*', 'shop_categories.name as cname')
+            ->first();
+          
+            
+        return view('fronts.owners.shop', $data);
+    }
+    public function create_shop(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['user'] = DB::table('shop_owners')->where('id',$user->id)->first();
+        $data['categories'] = DB::table('shop_categories')->where('active',1)->get();
+        return view('fronts.owners.create', $data);
+    }
     public function reset_password(Request $r)
     {
         $user = $r->session()->get('user');
@@ -225,5 +254,91 @@ EOT;
             return redirect('/owner/reset-password');
         }
 
+    }
+    public function save_shop(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data = array(
+            'name' => $r->name,
+            'shop_category' => $r->category,
+            'email' => $r->email,
+            'phone' => $r->phone,
+            'website' => $r->website,
+            'address' => $r->address,
+            'description' => $r->description,
+            'shop_owner' => $user->id
+        );
+        $i = DB::table('shops')->insertGetId($data);
+        if($r->hasFile('logo'))
+        {
+            $file = $r->file('logo');
+            $file_name = $file->getClientOriginalName();
+            $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
+            $file_name = 'logo'.date('d') .$i . $ss;
+            $destinationPath = 'uploads/shops/logo/'; 
+            $file->move($destinationPath, $file_name);
+            DB::table('shops')->where('id', $i)->update(['logo'=>$file_name]);
+        }
+        if($i)
+        {
+            return redirect('/owner/shop');
+        }
+        else{
+            $r->session()->flash('sms1', "Fail to create new shop. Please check again!");
+            return redirect('/owner/shop/create')->withInput();
+        }
+    }
+    public function edit_shop(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['user'] = DB::table('shop_owners')->where('id',$user->id)->first();
+        $data['categories'] = DB::table('shop_categories')->where('active',1)->get();
+        $data['shop'] = DB::table('shops')->where('id', $r->id)->first();
+        return view('fronts.owners.shop-edit', $data);
+    }
+    public function update_shop(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data = array(
+            'name' => $r->name,
+            'shop_category' => $r->category,
+            'email' => $r->email,
+            'phone' => $r->phone,
+            'website' => $r->website,
+            'address' => $r->address,
+            'description' => $r->description
+        );
+       
+        if($r->hasFile('logo'))
+        {
+            $file = $r->file('logo');
+            $file_name = $file->getClientOriginalName();
+            $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
+            $file_name = 'logo'.date('d') .$r->id . $ss;
+            $destinationPath = 'uploads/shops/logo/'; 
+            $file->move($destinationPath, $file_name);
+            $data['logo'] = $file_name;
+        }
+        $i = DB::table('shops')->where('id', $r->id)->update($data);
+        if($i)
+        {
+            return redirect('/owner/shop');
+        }
+        else{
+            $r->session()->flash('sms1', "Fail to update shop. Please check again!");
+            return redirect('/owner/shop/edit?id='.$r->id)->withInput();
+        }
     }
 }

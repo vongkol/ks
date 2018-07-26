@@ -6,6 +6,11 @@
 Route::get('/',"FrontController@index");
 Route::get('/front/login',"FrontController@login");
 // shop owner
+Route::get('/owner/shop', "FrontShopOwnerController@shop");
+Route::get('/owner/shop/create', "FrontShopOwnerController@create_shop");
+Route::get('/owner/shop/edit', "FrontShopOwnerController@edit_shop");
+Route::post('/owner/shop/save', "FrontShopOwnerController@save_shop");
+Route::post('/owner/shop/update', "FrontShopOwnerController@update_shop");
 Route::get('/owner/profile', "FrontShopOwnerController@profile");
 Route::get('/owner/profile/edit', "FrontShopOwnerController@edit_profile");
 Route::post('/owner/profile/update', "FrontShopOwnerController@update_profile");
