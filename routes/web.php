@@ -6,6 +6,7 @@
 Route::get('/',"FrontController@index");
 Route::get('/front/login',"FrontController@login");
 // shop owner
+Route::get('/owner/product', "FrontShopOwnerController@product");
 Route::get('/owner/shop', "FrontShopOwnerController@shop");
 Route::get('/owner/shop/create', "FrontShopOwnerController@create_shop");
 Route::get('/owner/shop/edit', "FrontShopOwnerController@edit_shop");

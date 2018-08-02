@@ -118,7 +118,7 @@
                                             <a href="{{url('/owner/shop')}}">My Shop</a>
                                         </li>
                                         <li>
-                                            <a href="#">My Product</a>
+                                            <a href="{{url('/owner/product')}}">My Product</a>
                                         </li>
                                         <li>
                                             <a href="{{url('/owner/logout')}}">Logout</a>

@@ -341,4 +341,23 @@ EOT;
             return redirect('/owner/shop/edit?id='.$r->id)->withInput();
         }
     }
+    public function product(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['user'] = DB::table('shop_owners')->where('id',$user->id)->first();
+        $shop = DB::table('shops')->where('shop_owner', $user->id)->first();
+
+        $data['products'] = DB::table('products')
+            ->join('product_categories', 'products.category_id', 'product_categories.id')
+            ->where('products.active', 1)
+            ->where('products.shop_id', $shop->id)
+            ->select('products.*', 'product_categories.name as cname')
+            ->orderBy('id', 'desc')
+            ->paginate(18);
+        return view('fronts.owners.product', $data);
+    }
 }
