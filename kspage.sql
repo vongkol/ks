@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 25, 2018 at 08:30 PM
+-- Generation Time: Aug 06, 2018 at 11:22 AM
 -- Server version: 10.1.26-MariaDB-0+deb9u1
 -- PHP Version: 7.2.7-1+0~20180622080745.23+stretch~1.gbpfd8e2e
 
@@ -201,6 +201,28 @@ CREATE TABLE `menu_options` (
   `member_id` int(11) NOT NULL,
   `active` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pages`
+--
+
+CREATE TABLE `pages` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` longtext,
+  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `url` varchar(200) NOT NULL DEFAULT '#',
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`id`, `title`, `description`, `active`, `url`, `create_at`) VALUES
+(1, 'Test', '<p>Test Page ok</p>', 1, 'admin/page/view/1', '2018-08-06 04:17:15');
 
 -- --------------------------------------------------------
 
@@ -830,6 +852,12 @@ ALTER TABLE `menu_options`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pages`
+--
+ALTER TABLE `pages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
@@ -989,6 +1017,12 @@ ALTER TABLE `event_categories`
 --
 ALTER TABLE `menu_options`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pages`
+--
+ALTER TABLE `pages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `permissions`
