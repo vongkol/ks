@@ -350,7 +350,10 @@ EOT;
         }
         $data['user'] = DB::table('shop_owners')->where('id',$user->id)->first();
         $shop = DB::table('shops')->where('shop_owner', $user->id)->first();
-
+        if($shop==null)
+        {
+            return redirect('/owner/shop');
+        }
         $data['products'] = DB::table('products')
             ->join('product_categories', 'products.category_id', 'product_categories.id')
             ->where('products.active', 1)
@@ -359,5 +362,24 @@ EOT;
             ->orderBy('id', 'desc')
             ->paginate(18);
         return view('fronts.owners.product', $data);
+    }
+    public function create_product(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['user'] = DB::table('shop_owners')->where('id',$user->id)->first();
+        $shop = DB::table('shops')->where('shop_owner', $user->id)->first();
+        if($shop==null)
+        {
+            return redirect('/owner/shop');
+        }
+        $data['categories'] = DB::table('product_categories')
+            ->where('active', 1)
+            ->orderBy('name')
+            ->get();
+        return view('fronts.owners.create-product', $data);
     }
 }

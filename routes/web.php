@@ -7,6 +7,7 @@ Route::get('/',"FrontController@index");
 Route::get('/front/login',"FrontController@login");
 // shop owner
 Route::get('/owner/product', "FrontShopOwnerController@product");
+Route::get('/owner/product/create', "FrontShopOwnerController@create_product");
 Route::get('/owner/shop', "FrontShopOwnerController@shop");
 Route::get('/owner/shop/create', "FrontShopOwnerController@create_shop");
 Route::get('/owner/shop/edit', "FrontShopOwnerController@edit_shop");
@@ -277,3 +278,12 @@ Route::post('/admin/product/save', "ProductController@save");
 Route::post('/admin/product/update', "ProductController@update");
 Route::get('/admin/product/photo/delete/{id}', "PhotoController@delete");
 Route::post('/admin/product/photo/save', "PhotoController@save");
+// page
+// Page
+Route::get('/admin/page', "PageController@index");
+Route::get('/admin/page/create', "PageController@create");
+Route::post('/admin/page/save', "PageController@save");
+Route::get('/admin/page/delete/{id}', "PageController@delete");
+Route::get('/admin/page/edit/{id}', "PageController@edit");
+Route::post('/admin/page/update', "PageController@update");
+Route::get('/admin/page/view/{id}', "PageController@view");

@@ -26,7 +26,7 @@ hr { border-top: 1px solid #e8ecf0;}
     2 Form Elements:
 -------------------------*/
 label { }
-.control-label { font-size: 13px; text-transform: capitalize; color: #3c424b; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.control-label { font-size: 13px; color: #3c424b; margin-bottom: 10px; letter-spacing: 1px; }
 
 .textarea.form-control { }
 .required { }

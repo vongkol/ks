@@ -3,7 +3,7 @@
    <div class="content bg-white">
        <div class="container">
             <p></p>
-            <h3 class="text-primary">My Products <a href="#" class="btn btn-primary btn-xs">New</a></h3>
+            <h3 class="text-primary">My Products <a href="{{url('/owner/product/create')}}" class="btn btn-primary btn-xs">New</a></h3>
             <hr>
             @if(Session::has('sms'))
                 <div class="alert alert-success" role="alert">

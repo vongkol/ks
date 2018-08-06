@@ -91,7 +91,7 @@
                     <a class="nav-link" href="#" id="user">File Manager</a>
                 </li> --}}
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="company">Page</a>
+                    <a class="nav-link" href="{{url('/admin/page')}}" id="menu_page">Page</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="business-type">File Manager</a>
