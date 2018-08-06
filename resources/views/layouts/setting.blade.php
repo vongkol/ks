@@ -94,7 +94,7 @@
                     <a class="nav-link" href="{{url('/admin/page')}}" id="menu_page">Page</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="business-type">File Manager</a>
+                    <a class="nav-link" href="{{url('/admin/file-manager')}}" id="menu_file_manager">File Manager</a>
                 </li>
                 <li class="nav-item"><strong>Security</strong></li>
                 <li class="nav-item">
