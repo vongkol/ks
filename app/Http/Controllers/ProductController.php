@@ -77,17 +77,17 @@ class ProductController extends Controller
                 $new_img = Image::make($file->getRealPath())->resize(350, null, function ($con) {
                     $con->aspectRatio();
                 });
+                
                 $destinationPath2 = 'uploads/products/featured/500/';
                 $new_img2 = Image::make($file->getRealPath())->resize(500, null, function ($con) {
                     $con->aspectRatio();
                 });
+
                 $new_img->save($destinationPath . $file_name, 80);
                 $new_img2->save($destinationPath2 . $file_name, 80);
 
                 DB::table('products')->where('id', $i)->update(['featured_image'=>$file_name]);
-            
             }
-
             $r->session()->flash('sms', 'New product has been create successfully!');
             return redirect('/admin/product/create');
         }

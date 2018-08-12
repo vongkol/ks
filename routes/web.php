@@ -8,6 +8,9 @@ Route::get('/front/login',"FrontController@login");
 // shop owner
 Route::get('/owner/product', "FrontShopOwnerController@product");
 Route::get('/owner/product/create', "FrontShopOwnerController@create_product");
+Route::get('/owner/product/edit', 'FrontShopOwnerController@edit_product');
+Route::get('/owner/product/delete/{id}', "FrontShopOwnerController@delete_product");
+Route::post('/owner/product/save', "FrontShopOwnerController@save_product");
 Route::get('/owner/shop', "FrontShopOwnerController@shop");
 Route::get('/owner/shop/create', "FrontShopOwnerController@create_shop");
 Route::get('/owner/shop/edit', "FrontShopOwnerController@edit_shop");

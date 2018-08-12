@@ -46,10 +46,11 @@
                         <td>{{$p->sell_price}}</td>
                         <td>{{$p->cname}}</td>
                         <td>
-                            <img src="{{asset('uploads/products/featured/'.$p->featured_image)}}" alt="Photo" width="120">
+                            <img src="{{asset('uploads/products/featured/'.$p->featured_image)}}" alt="Photo" width="54">
                         </td>
                         <td>
-                            <a href="#" class="btn">Delete</a>
+                            <a href="{{url('/owner/product/edit/?id='.$p->id)}}" class="btn btn-link text-success" title="Edit"><i class="fa fa-edit"></i></a>
+                            <a href="{{url('/owner/product/delete/'.$p->id)}}" class="btn btn-link text-danger" onclick="return confirm('You want to delete?')" title="Delete"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     @endforeach

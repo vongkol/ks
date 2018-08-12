@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Session;
+use Intervention\Image\ImageManagerStatic as Image;
+
 class FrontShopOwnerController extends Controller
 {
 
@@ -381,5 +383,125 @@ EOT;
             ->orderBy('name')
             ->get();
         return view('fronts.owners.create-product', $data);
+    }
+    public function save_product(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $shop = DB::table('shops')->where('shop_owner', $user->id)->first();
+        $data = array(
+            'name' => $r->name,
+            'category_id' => $r->category,
+            'shop_id' => $shop->id,
+            'price' => $r->price,
+            'sell_price' => $r->sell_price,
+            'type' => $r->type,
+            'quantity' => $r->quantity,
+            'short_description' => $r->short_description,
+            'description' => $r->description
+        );
+        $i = DB::table('products')->insertGetId($data);
+        if($i)
+        {
+            if($r->hasFile('photo'))
+            {
+                $file = $r->file('photo');
+                $file_name = $file->getClientOriginalName();
+                $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
+                $file_name = 'pro' .$i . $ss;
+                // upload 350
+                $destinationPath = 'uploads/products/featured/';
+                $new_img = Image::make($file->getRealPath())->resize(350, null, function ($con) {
+                    $con->aspectRatio();
+                });
+                $destinationPath2 = 'uploads/products/featured/500/';
+                $new_img2 = Image::make($file->getRealPath())->resize(500, null, function ($con) {
+                    $con->aspectRatio();
+                });
+                $new_img->save($destinationPath . $file_name, 80);
+                $new_img2->save($destinationPath2 . $file_name, 80);
+
+                DB::table('products')->where('id', $i)->update(['featured_image'=>$file_name]);
+            
+            }
+
+            $r->session()->flash('sms', 'New product has been create successfully!');
+            return redirect('/owner/product/create');
+        }
+    }
+    public function delete_product($id)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        DB::table('products')->where('id', $id)->delete();
+        return redirect('/owner/product');
+    }
+    public function edit_product(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['product'] = DB::table('products')
+            ->where('id', $r->id)
+            ->first();
+        $data['categories'] = DB::table('product_categories')
+            ->where('active', 1)
+            ->orderBy('name')
+            ->get();
+        return view('fronts.owners.edit-product', $data);
+    }
+    public function update_product(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $shop = DB::table('shops')->where('shop_owner', $user->id)->first();
+        $data = array(
+            'name' => $r->name,
+            'category_id' => $r->category,
+            'shop_id' => $shop->id,
+            'price' => $r->price,
+            'sell_price' => $r->sell_price,
+            'type' => $r->type,
+            'quantity' => $r->quantity,
+            'short_description' => $r->short_description,
+            'description' => $r->description
+        );
+        if($r->hasFile('photo'))
+        {
+            $file = $r->file('photo');
+            $file_name = $file->getClientOriginalName();
+            $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
+            $file_name = 'pro' .$i . $ss;
+            // upload 350
+            $destinationPath = 'uploads/products/featured/';
+            $new_img = Image::make($file->getRealPath())->resize(350, null, function ($con) {
+                $con->aspectRatio();
+            });
+            $destinationPath2 = 'uploads/products/featured/500/';
+            $new_img2 = Image::make($file->getRealPath())->resize(500, null, function ($con) {
+                $con->aspectRatio();
+            });
+            $new_img->save($destinationPath . $file_name, 80);
+            $new_img2->save($destinationPath2 . $file_name, 80);
+            $data['featured_image'] = $file_name;
+        }
+        if($i)
+        {
+            
+
+            $r->session()->flash('sms', 'New product has been create successfully!');
+            return redirect('/owner/product/create');
+        }
     }
 }

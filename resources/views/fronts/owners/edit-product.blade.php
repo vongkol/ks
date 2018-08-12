@@ -3,7 +3,7 @@
    <div class="content bg-white">
        <div class="container">
             <p></p>
-            <h3 class="text-primary">Create New Product <a href="{{url('/owner/product')}}" class="btn btn-success btn-xs">Back</a></h3>
+            <h3 class="text-primary">Edit Product <a href="{{url('/owner/product')}}" class="btn btn-success btn-xs">Back</a></h3>
             <hr>
             @if(Session::has('sms'))
                 <div class="alert alert-success" role="alert">
@@ -25,15 +25,15 @@
                     </div>
                 </div>
             @endif
-            <form action="{{url('/owner/product/save')}}" class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <form action="{{url('/owner/product/update')}}" class="form-horizontal" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-sm-7">
-                   
+                    <input type="hidden" name="id" value="{{$product->id}}">
                         {{csrf_field()}}
                         <div class="form-group row">
                             <label for="" class="control-label col-sm-3">Product Name <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="name" value="{{old('name')}}" required class="form-control">
+                                <input type="text" name="name" value="{{$product->name}}" required class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -41,7 +41,7 @@
                             <div class="col-sm-9">
                                 <select name="category" id="category" class="form-control">
                                     @foreach($categories as $c)
-                                        <option value="{{$c->id}}">{{$c->name}}</option>
+                                        <option value="{{$c->id}}" {{$product->category_id==$c->id?'selected':''}}>{{$c->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -50,39 +50,39 @@
                             <label for="" class="control-label col-sm-3">Product Type <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
                                 <select name="type" id="type" class="form-control">
-                                   <option value="General">General</option>
-                                   <option value="Baby">Baby</option>
+                                   <option value="General" {{$product->type=='General'?'selected':''}}>General</option>
+                                   <option value="Baby" {{$product->type=='Baby'?'selected':''}}>Baby</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="control-label col-sm-3">Quantity</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="quantity" value="{{old('quantity')}}">
+                                <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="control-label col-sm-3">Price <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
-                                <input type="texxt" name="price" value="{{old('price')}}" class="form-control" required>
+                                <input type="texxt" name="price" value="{{$product->price}}" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="control-label col-sm-3">Sale Price <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="sell_price" value="{{old('sell_price')}}" class="form-control" required>
+                                <input type="text" name="sell_price" value="{{$product->sell_price}}" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="control-label col-sm-3">Short Description</label>
                             <div class="col-sm-9">
-                                <textarea name="short_description" id="short_description" cols="30" rows="3" class="form-control"></textarea>
+                                <textarea name="short_description" id="short_description" cols="30" rows="3" class="form-control">{{$product->short_description}}</textarea>
                             </div>
                         </div>
                 </div>
                 <div class="col-sm-5">
                     <h4>Featured Image</h4>
-                    <img src="{{asset('uploads/shops/logo/default.png')}}" alt="Photo" width="130" id="img">
+                    <img src="{{asset('uploads/products/featured/'.$product->featured_image)}}" alt="Photo" width="130" id="img">
                     <p></p>
                     <p>
                         <input type="file" name="photo" onchange="loadFile(event)">
@@ -95,7 +95,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{$product->description}}</textarea>
                 </div>
             </div>
             <div class="row">
