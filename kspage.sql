@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 06, 2018 at 11:22 AM
+-- Generation Time: Aug 12, 2018 at 08:25 PM
 -- Server version: 10.1.26-MariaDB-0+deb9u1
 -- PHP Version: 7.2.7-1+0~20180622080745.23+stretch~1.gbpfd8e2e
 
@@ -289,7 +289,8 @@ INSERT INTO `products` (`id`, `name`, `category_id`, `shop_id`, `price`, `sell_p
 (5, 'OPPO F7', 1, 1, 600, 300, 'pro5.jpg', 'some description', '<p>Some description working!</p>', 1, '2018-07-03 12:23:54', 1, 'Baby', NULL),
 (6, 'Iphone 8', 1, 2, 200, 150, 'pro6.jpg', 'test', '<p>test</p>', 1, '2018-07-06 06:15:57', 1, 'General', 1),
 (7, 'Phone 6', 4, 2, 0, 0, 'pro7.jpg', '1', '<p>test</p>', 1, '2018-07-06 06:19:27', 1, 'Baby', 1),
-(8, 'Sample Baby Pro', 4, 1, 70, 50, 'pro8.jpg', 'This is the sample product.', '<p>This is the sample product for baby shop!</p>', 1, '2018-07-21 09:29:27', 10, 'Baby', NULL);
+(8, 'Sample Baby Pro', 4, 1, 70, 50, 'pro8.jpg', 'This is the sample product.', '<p>This is the sample product for baby shop!</p>', 1, '2018-07-21 09:29:27', 10, 'Baby', NULL),
+(11, 'test', 15, 1, 10, 8, 'pro34xrwe11.png', 'test edit', '<p>test</p>', 1, '2018-08-12 11:29:08', 100, 'General', NULL);
 
 -- --------------------------------------------------------
 
@@ -732,16 +733,19 @@ CREATE TABLE `shop_owners` (
   `password` varchar(250) NOT NULL,
   `is_verified` tinyint(4) NOT NULL DEFAULT '0',
   `active` tinyint(4) NOT NULL DEFAULT '0',
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `type` varchar(30) NOT NULL DEFAULT 'Shop Owner'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `shop_owners`
 --
 
-INSERT INTO `shop_owners` (`id`, `first_name`, `last_name`, `gender`, `email`, `phone`, `photo`, `address`, `username`, `password`, `is_verified`, `active`, `create_at`) VALUES
-(1, 'HENG', 'Vongkol', 'Male', 'hengvongkol@gmail.com', '017 837754', 'photo251.png', 'Phnom Penh, Cambodia', 'vongkol', '$2y$10$XZzS1DYEvhpew5TVvSGaPezFn60oVYmNEUF2jxXM9S5t131XKq1iy', 1, 0, '2018-07-25 09:00:49'),
-(2, 'pachak', 'men', 'Male', 'pachak.men@gmail.com', '0962831557', 'default.png', NULL, 'pachak', '$2y$10$/2dOdpU8ESlbmSNhGpRgv.H.7X.JQVHbw3To2cjo9QhYdiKR.0afS', 0, 0, '2018-07-25 12:40:02');
+INSERT INTO `shop_owners` (`id`, `first_name`, `last_name`, `gender`, `email`, `phone`, `photo`, `address`, `username`, `password`, `is_verified`, `active`, `create_at`, `type`) VALUES
+(1, 'HENG', 'Vongkol', 'Male', 'hengvongkol@gmail.com', '017 837754', 'photo251.png', 'Phnom Penh, Cambodia', 'vongkol', '$2y$10$XZzS1DYEvhpew5TVvSGaPezFn60oVYmNEUF2jxXM9S5t131XKq1iy', 1, 1, '2018-07-25 09:00:49', 'Shop Owner'),
+(2, 'pachak', 'men', 'Male', 'pachak.men@gmail.com', '0962831557', 'default.png', NULL, 'pachak', '$2y$10$/2dOdpU8ESlbmSNhGpRgv.H.7X.JQVHbw3To2cjo9QhYdiKR.0afS', 0, 0, '2018-07-25 12:40:02', 'Shop Owner'),
+(3, 'user1', 'user1', 'Male', 'user1@gmail.com', '234234', 'default.png', NULL, 'user1', '$2y$10$pKS5eSj73jnLd6uqO/6XlOePcJgWebJvkWBSiWFtq.ys3sPo.LDpG', 1, 1, '2018-08-12 13:07:13', 'Other'),
+(4, 'test', 'test', 'male', 'test@gmail.com', '234234', 'default.png', 'test', 'test', '$2y$10$3IsMJJvSEaKiR5b1yG3J4.d602ZSivlPwCrUddK7vKZAYS0m1CNdG', 1, 0, '2018-08-12 13:14:11', 'Shop Owner');
 
 -- --------------------------------------------------------
 
@@ -1034,7 +1038,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `product_categories`
@@ -1124,7 +1128,7 @@ ALTER TABLE `shop_categories`
 -- AUTO_INCREMENT for table `shop_owners`
 --
 ALTER TABLE `shop_owners`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `slides`
