@@ -87,6 +87,7 @@
                                     <ul>
                                         <li><a href="{{url('/product-listing')}}">Product Listing</a></li>
                                         <li><a href="{{url('/product/best-selling')}}">Best Selling </a></li>
+                                        <li><a href="{{url('/product/discount')}}">Discount Store </a></li>
                                     </ul>
                                 </li>
                                 <li><a href="{{url('company-category?al=All')}}">Company Listing</a></li>

@@ -59,4 +59,8 @@ class FrontProductController extends Controller
         return view('fronts.products.best-selling', $data);
 
     }
+    public function discount_store()
+    {
+        
+    }
 }

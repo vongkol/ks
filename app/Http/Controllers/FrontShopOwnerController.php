@@ -482,7 +482,7 @@ EOT;
             $file = $r->file('photo');
             $file_name = $file->getClientOriginalName();
             $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
-            $file_name = 'pro' .$i . $ss;
+            $file_name = 'pro34xrwe' .$r->id . $ss;
             // upload 350
             $destinationPath = 'uploads/products/featured/';
             $new_img = Image::make($file->getRealPath())->resize(350, null, function ($con) {
@@ -496,12 +496,10 @@ EOT;
             $new_img2->save($destinationPath2 . $file_name, 80);
             $data['featured_image'] = $file_name;
         }
-        if($i)
-        {
-            
-
-            $r->session()->flash('sms', 'New product has been create successfully!');
-            return redirect('/owner/product/create');
-        }
+        $i = DB::table('products')
+            ->where('id', $r->id)
+            ->update($data);
+        $r->session()->flash('sms', 'All changes have been saved successfully!');
+        return redirect('/owner/product/edit?id='.$r->id);
     }
 }
