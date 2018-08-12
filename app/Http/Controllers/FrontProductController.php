@@ -61,6 +61,11 @@ class FrontProductController extends Controller
     }
     public function discount_store()
     {
-        
+        $data['products'] = DB::table('products')
+            ->where('active', 1)
+            ->where('type', 'General')
+            ->orderBy('id', 'desc')
+            ->paginate(40);
+        return view('fronts.shops.discount-store', $data);
     }
 }
