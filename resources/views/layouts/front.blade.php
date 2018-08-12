@@ -88,6 +88,7 @@
                                         <li><a href="{{url('/product-listing')}}">Product Listing</a></li>
                                         <li><a href="{{url('/product/best-selling')}}">Best Selling </a></li>
                                         <li><a href="{{url('/product/discount')}}">Discount Store </a></li>
+                                        <li><a href="{{url('/business-transfer')}}">Business Transfer</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="{{url('company-category?al=All')}}">Company Listing</a></li>
@@ -115,12 +116,20 @@
                                         <li>
                                             <a href="{{url('/owner/reset-password')}}">Reset Password</a>
                                         </li>
+                                        @if(session('user')->type=='Other')
+                                        <li>
+                                            <a href="{{url('/owner/business-transfer')}}">Business Transfer</a>
+                                        </li>
+                                        @else
                                         <li>
                                             <a href="{{url('/owner/shop')}}">My Shop</a>
                                         </li>
                                         <li>
                                             <a href="{{url('/owner/product')}}">My Product</a>
                                         </li>
+                                        @endif
+                                       
+                                       
                                         <li>
                                             <a href="{{url('/owner/logout')}}">Logout</a>
                                         </li>

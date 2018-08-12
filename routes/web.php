@@ -29,6 +29,7 @@ Route::post('/owner/reset-password/update', "FrontShopOwnerController@reset_pass
 Route::get('/confirm/{id}', "FrontShopOwnerController@confirm");
 Route::view('/test', 'fronts.owners.confirm');
 // product
+Route::get('/business-transfer',"FrontProductController@business_transfer");
 Route::get('/product-list',"FrontController@product_list");
 Route::get('/product-single',"FrontController@product_single");
 Route::get('/product/best-selling', "FrontProductController@best_selling");

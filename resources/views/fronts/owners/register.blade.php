@@ -54,6 +54,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="type" class="control-label col-sm-3">Type <span class="text-danger">*</span></label>
+                        <div class="col-sm-9">
+                            <select name="type" id="type" class="form-control">
+                                <option value="Shop Owner">Shop Owner</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="address" class="control-label col-sm-3">Address</label>
                         <div class="col-sm-9">
                             <input type="text" id="address" class="form-control" name="address"

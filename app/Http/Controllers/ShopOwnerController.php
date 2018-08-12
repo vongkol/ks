@@ -52,6 +52,8 @@ class ShopOwnerController extends Controller
                 "address" => $request->address,
                 "email" => $request->email,
                 "username" => $request->username,
+                'is_verified' => 1,
+                'active' => 1,
                 "password" => password_hash($request->password, PASSWORD_BCRYPT),
             );
             $i = DB::table('shop_owners')->insertGetId($data);

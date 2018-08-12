@@ -66,7 +66,8 @@ class FrontShopOwnerController extends Controller
             'email' => $r->email,
             'phone' => $r->phone,
             'username' => $r->username,
-            'password' => bcrypt($r->password)
+            'password' => bcrypt($r->password),
+            'type' => $r->type
         );
         $counter = DB::table('shop_owners')
             ->where('username', $r->username)
@@ -105,7 +106,7 @@ EOT;
     }
     public function confirm($id)
     {
-        DB::statement("UPDATE shop_owners set is_verified=1 where md5(id)='{$id}'");
+        DB::statement("UPDATE shop_owners set is_verified=1, active=1 where md5(id)='{$id}'");
         return redirect('/shop-owner/login');
     }
     public function login(){
