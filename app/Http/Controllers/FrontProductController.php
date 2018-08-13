@@ -66,6 +66,14 @@ class FrontProductController extends Controller
             ->where('type', 'General')
             ->orderBy('id', 'desc')
             ->paginate(40);
+        $data['shop_categories'] = DB::table('shop_categories')
+            ->where('active', 1)
+            ->orderBy('name', 'asc')
+            ->get();
+        $data['shops'] = DB::table('shops')
+            ->where('active', 1)
+            ->orderBy('id', 'desc')
+            ->paginate(30);
         return view('fronts.shops.discount-store', $data);
     }
     public function business_transfer()

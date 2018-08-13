@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 12, 2018 at 08:25 PM
+-- Generation Time: Aug 13, 2018 at 02:43 PM
 -- Server version: 10.1.26-MariaDB-0+deb9u1
 -- PHP Version: 7.2.7-1+0~20180622080745.23+stretch~1.gbpfd8e2e
 
@@ -21,6 +21,24 @@ SET time_zone = "+00:00";
 --
 -- Database: `kspage`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `business_transfers`
+--
+
+CREATE TABLE `business_transfers` (
+  `id` bigint(20) NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `short_description` text,
+  `featured_image` varchar(220) NOT NULL DEFAULT 'default.png',
+  `owner_id` int(11) NOT NULL,
+  `description` longtext,
+  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -274,23 +292,24 @@ CREATE TABLE `products` (
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `quantity` int(11) DEFAULT NULL,
   `type` varchar(30) DEFAULT 'General',
-  `best_sell` int(11) DEFAULT NULL
+  `best_sell` int(11) DEFAULT NULL,
+  `discount` float NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `category_id`, `shop_id`, `price`, `sell_price`, `featured_image`, `short_description`, `description`, `active`, `create_at`, `quantity`, `type`, `best_sell`) VALUES
-(1, 'OnePlus 6', 3, 1, 560, 550, 'pro1.jpg', 'OnePlus 6 is the Android phone for 2018.', '<p>Put some description of your phone here...</p>', 1, '2018-06-18 03:14:01', 20, 'General', 1),
-(2, 'McBook Pro 2017', 12, 1, 2900, 2500, 'pro2.jpg', 'The best laptop from Apple this year.', '<p>This is the mc book pro 2017, the best laptop from apple ever made over the past decade.</p>', 0, '2018-06-21 02:55:37', 30, 'General', NULL),
-(3, 'iPhone 8 Plus', 1, 1, 800, 700, 'pro3.jpg', 'some description', '<p>I phone</p>', 1, '2018-07-03 12:12:57', 1, 'General', 1),
-(4, 'Test Product', 4, 2, 800, 680, 'pro4.jpg', 'sdfsfsdfsd', '<p>sdfsadfsadf</p>', 1, '2018-07-03 12:21:14', 1, 'General', NULL),
-(5, 'OPPO F7', 1, 1, 600, 300, 'pro5.jpg', 'some description', '<p>Some description working!</p>', 1, '2018-07-03 12:23:54', 1, 'Baby', NULL),
-(6, 'Iphone 8', 1, 2, 200, 150, 'pro6.jpg', 'test', '<p>test</p>', 1, '2018-07-06 06:15:57', 1, 'General', 1),
-(7, 'Phone 6', 4, 2, 0, 0, 'pro7.jpg', '1', '<p>test</p>', 1, '2018-07-06 06:19:27', 1, 'Baby', 1),
-(8, 'Sample Baby Pro', 4, 1, 70, 50, 'pro8.jpg', 'This is the sample product.', '<p>This is the sample product for baby shop!</p>', 1, '2018-07-21 09:29:27', 10, 'Baby', NULL),
-(11, 'test', 15, 1, 10, 8, 'pro34xrwe11.png', 'test edit', '<p>test</p>', 1, '2018-08-12 11:29:08', 100, 'General', NULL);
+INSERT INTO `products` (`id`, `name`, `category_id`, `shop_id`, `price`, `sell_price`, `featured_image`, `short_description`, `description`, `active`, `create_at`, `quantity`, `type`, `best_sell`, `discount`) VALUES
+(1, 'OnePlus 6', 3, 1, 560, 550, 'pro1.jpg', 'OnePlus 6 is the Android phone for 2018.', '<p>Put some description of your phone here...</p>', 1, '2018-06-18 03:14:01', 20, 'General', 1, 5),
+(2, 'McBook Pro 2017', 12, 1, 2900, 2500, 'pro2.jpg', 'The best laptop from Apple this year.', '<p>This is the mc book pro 2017, the best laptop from apple ever made over the past decade.</p>', 0, '2018-06-21 02:55:37', 30, 'General', NULL, 0),
+(3, 'iPhone 8 Plus', 1, 1, 800, 700, 'pro3.jpg', 'some description', '<p>I phone</p>', 1, '2018-07-03 12:12:57', 1, 'General', 1, 0),
+(4, 'Test Product', 4, 2, 800, 680, 'pro4.jpg', 'sdfsfsdfsd', '<p>sdfsadfsadf</p>', 1, '2018-07-03 12:21:14', 1, 'General', NULL, 9),
+(5, 'OPPO F7', 1, 1, 600, 300, 'pro5.jpg', 'some description', '<p>Some description working!</p>', 1, '2018-07-03 12:23:54', 1, 'Baby', NULL, 6),
+(6, 'Iphone 8', 1, 2, 200, 150, 'pro6.jpg', 'test', '<p>test</p>', 1, '2018-07-06 06:15:57', 1, 'General', 1, 0),
+(7, 'Phone 6', 4, 2, 0, 0, 'pro7.jpg', '1', '<p>test</p>', 1, '2018-07-06 06:19:27', 1, 'Baby', 1, 0),
+(8, 'Sample Baby Pro', 4, 1, 70, 50, 'pro8.jpg', 'This is the sample product.', '<p>This is the sample product for baby shop!</p>', 1, '2018-07-21 09:29:27', 10, 'Baby', NULL, 0),
+(11, 'test', 15, 1, 10, 8, 'pro34xrwe11.png', 'test edit', '<p>test</p>', 1, '2018-08-12 11:29:08', 100, 'General', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -742,10 +761,7 @@ CREATE TABLE `shop_owners` (
 --
 
 INSERT INTO `shop_owners` (`id`, `first_name`, `last_name`, `gender`, `email`, `phone`, `photo`, `address`, `username`, `password`, `is_verified`, `active`, `create_at`, `type`) VALUES
-(1, 'HENG', 'Vongkol', 'Male', 'hengvongkol@gmail.com', '017 837754', 'photo251.png', 'Phnom Penh, Cambodia', 'vongkol', '$2y$10$XZzS1DYEvhpew5TVvSGaPezFn60oVYmNEUF2jxXM9S5t131XKq1iy', 1, 1, '2018-07-25 09:00:49', 'Shop Owner'),
-(2, 'pachak', 'men', 'Male', 'pachak.men@gmail.com', '0962831557', 'default.png', NULL, 'pachak', '$2y$10$/2dOdpU8ESlbmSNhGpRgv.H.7X.JQVHbw3To2cjo9QhYdiKR.0afS', 0, 0, '2018-07-25 12:40:02', 'Shop Owner'),
-(3, 'user1', 'user1', 'Male', 'user1@gmail.com', '234234', 'default.png', NULL, 'user1', '$2y$10$pKS5eSj73jnLd6uqO/6XlOePcJgWebJvkWBSiWFtq.ys3sPo.LDpG', 1, 1, '2018-08-12 13:07:13', 'Other'),
-(4, 'test', 'test', 'male', 'test@gmail.com', '234234', 'default.png', 'test', 'test', '$2y$10$3IsMJJvSEaKiR5b1yG3J4.d602ZSivlPwCrUddK7vKZAYS0m1CNdG', 1, 0, '2018-08-12 13:14:11', 'Shop Owner');
+(2, 'HENG', 'Vongkol', 'Male', 'hengvongkol@gmail.com', '234234', 'default.png', NULL, 'vongkol', '$2y$10$7Weubt2dmwGIW7GUEdhsiuLiIozlcBl7l3Aqy3CSPv3KNGLlS8Mh2', 1, 1, '2018-08-13 03:07:55', 'Shop Owner');
 
 -- --------------------------------------------------------
 
@@ -776,6 +792,19 @@ INSERT INTO `slides` (`id`, `name`, `photo`, `create_at`, `active`, `order`, `ur
 (5, 'Iphone 8 Plus', 'slider_3.jpg', '2018-05-07 02:20:25', 1, 1, '#', '5.5 inch Retina HD Display | 12MP wide-angle cameras'),
 (6, 'test', 'WWW.YIFY-TORRENTS.COM.jpg', '2018-05-07 02:28:18', 0, 1, '11111', 'test'),
 (7, 'Red Mi Y1', 'slider_2.jpg', '2018-05-07 02:31:41', 1, 2, '#', 'LED Selfie-light | Fingerprint sensor | Dedicated microSD card slot Snapdragon 435 octa-core processor');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transfers_categories`
+--
+
+CREATE TABLE `transfers_categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(120) NOT NULL,
+  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -812,6 +841,12 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `remember_token`, `c
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `business_transfers`
+--
+ALTER TABLE `business_transfers`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `business_types`
@@ -970,6 +1005,12 @@ ALTER TABLE `slides`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `transfers_categories`
+--
+ALTER TABLE `transfers_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -979,6 +1020,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `business_transfers`
+--
+ALTER TABLE `business_transfers`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `business_types`
@@ -1128,13 +1175,19 @@ ALTER TABLE `shop_categories`
 -- AUTO_INCREMENT for table `shop_owners`
 --
 ALTER TABLE `shop_owners`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `slides`
 --
 ALTER TABLE `slides`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `transfers_categories`
+--
+ALTER TABLE `transfers_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
