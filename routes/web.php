@@ -302,3 +302,6 @@ Route::post('/admin/page/update', "PageController@update");
 Route::get('/admin/page/view/{id}', "PageController@view");
 // load file manager
 Route::get('/admin/file-manager', "FileManagerController@index");
+// business transfer
+Route::get('/admin/business-transfer', "BusinessTransferController@index");
+Route::get('/admin/transfer', "BusinessTransferController@transfer");

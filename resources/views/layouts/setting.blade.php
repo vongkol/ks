@@ -43,6 +43,9 @@
                     <a class="nav-link" href="{{url('/admin/company-management')}}">Companies</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{url('/admin/business-transfer')}}">Business Transfer</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/school-management')}}">Schools</a>
                 </li>
                 <li class="nav-item">
