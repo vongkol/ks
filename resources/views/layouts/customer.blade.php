@@ -96,6 +96,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/shop-category')}}" id="menu_shop_category">Shop Category</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/admin/transfer-category')}}" id="menu_transfer_category">Transfer Category</a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/review-category')}}" id="menu_review_category">Review Category</a>
                 </li> --}}

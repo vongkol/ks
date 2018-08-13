@@ -164,6 +164,14 @@ Route::get("/admin/school-category/delete/{id}", "SchoolCategoryController@destr
 Route::post("/admin/school-category/save", "SchoolCategoryController@store");
 Route::post("/admin/school-category/update", "SchoolCategoryController@update");
 
+// transfer category
+Route::get("/admin/transfer-category", "TransferCategoryController@index");
+Route::get("/admin/transfer-category/create", "TransferCategoryController@create");
+Route::get("/admin/transfer-category/edit/{id}", "TransferCategoryController@edit");
+Route::get("/admin/transfer-category/delete/{id}", "TransferCategoryController@delete");
+Route::post("/admin/transfer-category/save", "TransferCategoryController@save");
+Route::post("/admin/transfer-category/update", "TransferCategoryController@update");
+
 // school program
 Route::get("/admin/school-program", "SchoolProgramController@index");
 Route::get("/admin/school-program/create", "SchoolProgramController@create");
