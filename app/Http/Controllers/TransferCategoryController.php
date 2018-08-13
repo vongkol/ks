@@ -34,10 +34,10 @@ class TransferCategoryController extends Controller
         );
         $i = DB::table("transfers_categories")->insert($data);
         if ($i) {
-            $r->session()->flash("sms", "New category has been created successfully!");
+            $r->session()->flash("sms", "New business transfer category has been created successfully!");
             return redirect("/admin/transfer-category/create");
         } else {
-            $r->session()->flash("sms1", "Fail to create new category!");
+            $r->session()->flash("sms1", "Fail to create new business transfer category!");
             return redirect("/admin/transfer-category/create");
         }
     }

@@ -82,17 +82,14 @@
             <ul class="nav nav-pills flex-column" id="siderbar">
                 <li class="nav-item"><strong>Management</strong></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('/admin/transfer')}}" id="menu_transfer">Business Transfer</a>
+                    <a class="nav-link" href="{{url('/admin/transfer')}}" id="menu_business_transfer">Business Transfer</a>
                 </li>
                 <li class="nav-item">
                     <strong>Settings</strong>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('/admin/transfer-category')}}" id="menu_category">Business Transfer Category</a>
+                    <a class="nav-link" href="{{url('/admin/transfer-category')}}" id="menu_transfer_category">Business Transfer Category</a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="{{url('/admin/review-category')}}" id="menu_review_category">Review Category</a>
-                </li> --}}
             </ul>
         </nav>
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2">
