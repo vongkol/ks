@@ -313,4 +313,12 @@ class FrontController extends Controller
             ->get();
         return view('fronts.products.detail', $data);
     }
+    public function business_transfer()
+    {
+        $data['transfers'] = DB::table('business_transfers')
+            ->where('active', 1)
+            ->orderBy('id', 'desc')
+            ->paginate(40);
+        return view('fronts.shops.transfer', $data);
+    }
 }
