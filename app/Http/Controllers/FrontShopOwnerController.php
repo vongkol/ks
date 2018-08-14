@@ -503,4 +503,19 @@ EOT;
         $r->session()->flash('sms', 'All changes have been saved successfully!');
         return redirect('/owner/product/edit?id='.$r->id);
     }
+    public function business_transfer(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['transfers'] = DB::table('business_transfers')
+            ->join('transfers_categories', 'business_transfers.category_id', 'transfers_categories.id')
+            ->where('business_transfers.owner_id', $user->id)
+            ->orderBy('business_transfers.id', 'desc')
+            ->select('business_transfers.*', 'transfers_categories.name')
+            ->get();
+        return view('fronts.owners.business', $data);
+    }
 }
