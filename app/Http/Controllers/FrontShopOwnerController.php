@@ -513,9 +513,70 @@ EOT;
         $data['transfers'] = DB::table('business_transfers')
             ->join('transfers_categories', 'business_transfers.category_id', 'transfers_categories.id')
             ->where('business_transfers.owner_id', $user->id)
+            ->where('business_transfers.active', 1)
             ->orderBy('business_transfers.id', 'desc')
             ->select('business_transfers.*', 'transfers_categories.name')
             ->get();
         return view('fronts.owners.business', $data);
+    }
+    public function create_business(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['categories'] = DB::table('transfers_categories')
+            ->where('active', 1)
+            ->orderBy('name')
+            ->get();
+        return view('fronts.owners.create-business', $data);
+    }
+    public function save_business(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+
+        $data = array(
+            "title" => $r->title,
+            "category_id" => $r->category,
+            "short_description" => $r->short_description,
+            "owner_id" => $user->id,
+            "description" => $r->description,
+        );
+        $i = DB::table('business_transfers')->insertGetId($data);
+        if($r->hasFile('photo'))
+        {
+            $file = $r->file('photo');
+            $file_name = $file->getClientOriginalName();
+            $destinationPath = 'uploads/business_transfers/'; // usually in public folder
+            $file->move($destinationPath, $i.$file_name);
+            $data['featured_image'] = $i.$file_name;
+          
+            $i = DB::table('business_transfers')->where('id', $i)->update($data);
+        }
+        if ($i)
+        {
+            $r->session()->flash("sms", "New business transfer has been created successfully!");
+            return redirect("/owner/business/create");
+        }
+        else
+        {
+            $r->session()->flash("sms1", "Fail to create new event business transfer!");
+            return redirect("/owner/business/create")->withInput();
+        }
+    }
+    public function delete_business(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        DB::table('business_transfers')->where('id', $r->id)->update(["active"=>0]);
+        return redirect('/owner/business-transfer');
     }
 }

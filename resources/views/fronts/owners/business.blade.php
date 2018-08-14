@@ -46,7 +46,7 @@
                         </td>
                         <td>
                             <a href="{{url('/owner/business/edit/?id='.$p->id)}}" class="btn btn-link text-success" title="Edit"><i class="fa fa-edit"></i></a>
-                            <a href="{{url('/owner/business/delete/'.$p->id)}}" class="btn btn-link text-danger" onclick="return confirm('You want to delete?')" title="Delete"><i class="fa fa-trash"></i></a>
+                            <a href="{{url('/owner/business/delete?id='.$p->id)}}" class="btn btn-link text-danger" onclick="return confirm('You want to delete?')" title="Delete"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     @endforeach
