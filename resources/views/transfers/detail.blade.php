@@ -77,3 +77,11 @@
         </div>
     </div>
 @endsection
+@section('js')
+    <script>
+        $(document).ready(function () {
+            $("#siderbar li a").removeClass("current");
+            $("#menu_business_transfer").addClass("current");
+        })
+    </script>
+@endsection

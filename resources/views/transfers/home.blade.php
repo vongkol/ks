@@ -1,4 +1,4 @@
-@extends('layouts.company')
+@extends('layouts.business')
 @section('content')
     <div class="container">
         <div class="row">
