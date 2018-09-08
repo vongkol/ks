@@ -82,7 +82,7 @@
             <ul class="nav nav-pills flex-column" id="siderbar">
                 <li class="nav-item"><strong>Management</strong></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="product">Customer</a>
+                    <a class="nav-link" href="{{url('admin/customer')}}" id="menu_customer">Customer</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/shop-owner')}}" id="menu_shop_owner">Shop Owner</a>
@@ -90,9 +90,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/shop')}}" id="menu_shop">Shop</a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="{{url('/admin/review')}}" id="menu_review">Review</a>
-                </li> --}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/admin/product-newsletter')}}" id="menu_product_newsletter">Product Newsletter</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url('admin/event-newsletter')}}" class="nav-link" id="menu_event_newsletter">Event Newsletter</a>
+                </li>
                 <li class="nav-item">
                     <strong>Settings</strong>
                 </li>

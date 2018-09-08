@@ -13,7 +13,6 @@
                     <th>Title</th>
                     <th>Short Descritpion</th>
                     <th>Category</th>
-                    <th>Shop Owner</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -31,7 +30,6 @@
                         <td>{{$b->title}}</td>
                         <td>{{$b->short_description}}</td>
                         <td>{{$b->name}}</td>
-                        <td>{{$b->first_name}} {{$b->last_name}}</td>
                         <td>
                             <a href="{{url('/admin/business-transfer/detail/'.$b->id)}}" title="Detail"><i class="fa fa-eye"></i></a>
                             &nbsp;<a href="{{url('/admin/business-transfer/edit/'.$b->id)}}" title="Edit"><i class="fa fa-pencil text-success"></i></a>

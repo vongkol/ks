@@ -41,6 +41,85 @@
         </div>
     </div>
     <!-- /.mobile showcase -->
+    @if(Session::has('customer'))
+        @if($recs!=null)
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="box">
+                        <div class="box-head">
+                            <h3 class="head-title">Recommended Products</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                @foreach($recs as $p)
+                                <div class="col-lg-3 col-md-3 col-sm-6 pd-0">
+                                    <div class="product-block  h-100">
+                                        <div class="product-img"><a href="{{url('product/'.$p->id)}}"><img src="{{asset('uploads/products/featured/'.$p->featured_image)}}" alt="" width="100%"></a></div>
+                                        <div class="product-content">
+                                            <h5><a href="{{url('product/'.$p->id)}}" class="product-title">{{$p->name}}</h5>
+                                            <div class="product-meta"><a href="#" class="product-price">${{$p->price}}</a>
+                                                <a href="{{url('product/'.$p->id)}}" class="discounted-price">${{$p->sell_price}}</a>
+                                            </div>
+                                            <div class="shopping-btn">
+                                                {{-- <a href="#" class="product-btn btn-like"><i class="fa fa-heart"></i></a>
+                                                <a href="#" class="product-btn btn-cart"><i class="fa fa-shopping-cart"></i></a> --}}
+                                                <a href="{{url('product/'.$p->id)}}" class="btn btn-primary btn-xs">View Detail</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+        @if($evts!=null)
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="box">
+                        <div class="box-head">
+                            <h3 class="head-title">Recommended Events</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                @foreach($evts as $ev)
+                                    <div class="col-lg-3 col-md-3 mb20 pd-0">
+                                        <div class="product-block h-100">
+                                            <div class="image-event">
+                                                <a href="{{url('/event/detail/'.$ev->id)}}" target="_blank">
+                                                    <img src="{{asset('/uploads/events/featured_image/small/'.$ev->featured_image)}}" width="100%" alt="">
+                                                </a>
+                                            </div>
+                                            <div align="left" class="product-content">
+                                                <h5  class="text-gray index-text">
+                                                    <i class="fa fa-calendar-check-o"></i> {{$ev->event_date}} <b>-</b> <i class="fa fa-clock-o" ></i> {{$ev->start_time }} <label class="price float-right">
+                                                        @if($ev->price <= 0)
+                                                            Free
+                                                        @else 
+                                                            $ {{$ev->price}}
+                                                        @endif
+                                                    </label>
+                                                </h5>
+                                                <h4 class="index-event-title"> <a href="{{url('/event/detail/'.$ev->id)}}" target="_blank">{{$ev->title}}</a></h4>
+                                                <h5  class="text-gray index-event-location">
+                                                    <i class="fa fa-map-marker"></i> {{$ev->location}}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+    @endif
     <!-- latest products -->
     <div class="container">
         <div class="row">

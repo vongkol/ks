@@ -4,7 +4,13 @@
 // front 
 
 Route::get('/',"FrontController@index");
-Route::get('/front/login',"FrontController@login");
+// customer
+Route::view('/customer/login', "fronts.customers.login");
+Route::view('/customer/sign-up', "fronts.customers.sign-up");
+Route::get('/customer/logout', "CustomerController@logout");
+Route::post('/customer/save', "CustomerController@save");
+Route::post('/customer/do-login', "CustomerController@login");
+
 // shop owner
 Route::get('/owner/business-transfer', "FrontShopOwnerController@business_transfer");
 Route::get('/owner/business/create', "FrontShopOwnerController@create_business");
@@ -318,3 +324,15 @@ Route::get('/admin/business-transfer/edit/{id}', "BusinessTransferController@edi
 Route::post("/admin/business-transfer/save", "BusinessTransferController@save");
 Route::post('/admin/business-transfer/update', "BusinessTransferController@update");
 Route::get('/admin/business-transfer/delete/{id}', "BusinessTransferController@delete");
+// customer
+Route::get('/admin/customer', "ManageCustomerController@index");
+Route::get('/admin/customer/create', "ManageCustomerController@create");
+Route::get('/admin/customer/delete/{id}', "ManageCustomerController@delete");
+Route::get('/admin/customer/edit/{id}', "ManageCustomerController@edit");
+Route::post('/admin/customer/save', "ManageCustomerController@save");
+Route::post('/admin/customer/update', "ManageCustomerController@update");
+// newsletter
+Route::get('/admin/product-newsletter', 'NewsletterController@product');
+Route::get('/admin/product-newsletter/send', 'NewsletterController@send_product');
+Route::get('/admin/event-newsletter', 'NewsletterController@event');
+Route::get('/admin/event-newsletter/send', 'NewsletterController@send_event');

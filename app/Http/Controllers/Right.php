@@ -64,11 +64,11 @@ class Right
             $mail->CharSet = "utf-8"; 
             $mail->SMTPAuth = true; 
             $mail->SMTPSecure = "ssl";
-            $mail->Host = "gator4170.hostgator.com";
+            $mail->Host = "mail.vdoo.biz";
             $mail->Port = 465; 
-            $mail->Username = "sales@bill-trade.com";
+            $mail->Username = "ks@vdoo.biz";
             $mail->Password = "Khmer@123";
-            $mail->setFrom("sales@bill-trade.com", "sales@bill-trade.com");
+            $mail->setFrom("ks@vdoo.biz", "ks@vdoo.biz");
             $mail->Subject = $subject;
             $mail->MsgHTML($message);
             $mail->addAddress($to, $to);

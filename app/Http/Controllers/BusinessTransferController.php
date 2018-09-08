@@ -21,9 +21,8 @@ class BusinessTransferController extends Controller
     {
         $data['business_transfers'] = DB::table("business_transfers")
             ->join('transfers_categories', 'transfers_categories.id', 'business_transfers.category_id')
-            ->join('users', 'users.id', 'business_transfers.owner_id')
-            ->select('users.*', 'transfers_categories.*', 'business_transfers.*')
             ->where('business_transfers.active',1)
+            ->select('business_transfers.*', 'transfers_categories.name')
             ->paginate(12);
         return view('transfers.index', $data);
     }

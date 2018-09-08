@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 13, 2018 at 02:43 PM
+-- Generation Time: Sep 08, 2018 at 06:25 PM
 -- Server version: 10.1.26-MariaDB-0+deb9u1
 -- PHP Version: 7.2.7-1+0~20180622080745.23+stretch~1.gbpfd8e2e
 
@@ -39,6 +39,16 @@ CREATE TABLE `business_transfers` (
   `active` tinyint(4) NOT NULL DEFAULT '1',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `business_transfers`
+--
+
+INSERT INTO `business_transfers` (`id`, `title`, `category_id`, `short_description`, `featured_image`, `owner_id`, `description`, `active`, `create_at`) VALUES
+(1, 'Transfer Computer Shop for 2000$ only', 2, 'hello World', '1kunapheap-logo.png', 2, '<p>Some description</p>', 1, '2018-08-14 00:59:13'),
+(2, 'test hello world', 2, 'sdfasdfsadfsdfsdf', 'default.png', 2, '<p>sadfasdfasdfsadf</p>', 0, '2018-08-14 02:02:39'),
+(3, 'test hello world', 2, 'hello', '3header-logo.png', 1, '<p>some description</p>', 1, '2018-08-14 02:03:10'),
+(4, 'test', 2, 'yes', '4requirement.png', 1, '<p>sdfasdf</p>', 1, '2018-08-14 02:29:35');
 
 -- --------------------------------------------------------
 
@@ -138,6 +148,59 @@ INSERT INTO `company_categories` (`id`, `name`, `active`, `create_at`, `parent_i
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` bigint(20) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(30) NOT NULL,
+  `gender` varchar(9) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `phone` varchar(30) DEFAULT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(120) NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `first_name`, `last_name`, `gender`, `email`, `phone`, `username`, `password`, `create_at`) VALUES
+(2, 'HENG', 'Vongkol', 'Male', 'hengvongkol@gmail.com', '345345', 'vongkol', '$2y$10$qiyti7W4tfxwu2LANS6RwOQqbZVZ9o3KaSTpVR1tPJntGG8fUV57S', '2018-09-08 07:19:52'),
+(4, 'Oudom', 'PEN', 'Male', 'vongkolheng@gmail.com', '123141', 'dom', '234', '2018-09-08 08:38:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_histories`
+--
+
+CREATE TABLE `customer_histories` (
+  `id` bigint(20) NOT NULL,
+  `customer_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `create_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `customer_histories`
+--
+
+INSERT INTO `customer_histories` (`id`, `customer_id`, `product_id`, `category_id`, `create_at`) VALUES
+(1, 1, 4, 4, '2018-09-04'),
+(2, 1, 1, 3, '2018-09-04'),
+(3, 1, 4, 4, '2018-09-04'),
+(4, 1, 1, 3, '2018-09-04'),
+(5, 2, 4, 4, '2018-09-08'),
+(6, 2, 8, 4, '2018-09-08'),
+(7, 2, 4, 4, '2018-09-08');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `events`
 --
 
@@ -206,6 +269,32 @@ INSERT INTO `event_categories` (`id`, `name`, `active`, `create_at`, `parent_id`
 (6, 'Business', 1, '2018-05-08 16:53:58', 0, '6vdoo.png'),
 (7, 'test', 1, '2018-07-06 03:33:33', 3, 'default.png'),
 (8, '1-event', 1, '2018-07-06 07:44:03', 1, 'default.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_histories`
+--
+
+CREATE TABLE `event_histories` (
+  `id` bigint(20) NOT NULL,
+  `customer_id` bigint(20) NOT NULL,
+  `event_id` bigint(20) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `create_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `event_histories`
+--
+
+INSERT INTO `event_histories` (`id`, `customer_id`, `event_id`, `category_id`, `create_at`) VALUES
+(1, 1, 12, 2, '2018-09-08'),
+(2, 1, 13, 3, '2018-09-08'),
+(3, 1, 10, 2, '2018-09-08'),
+(4, 1, 10, 2, '2018-09-08'),
+(5, 2, 10, 2, '2018-09-08'),
+(6, 2, 10, 2, '2018-09-08');
 
 -- --------------------------------------------------------
 
@@ -761,7 +850,7 @@ CREATE TABLE `shop_owners` (
 --
 
 INSERT INTO `shop_owners` (`id`, `first_name`, `last_name`, `gender`, `email`, `phone`, `photo`, `address`, `username`, `password`, `is_verified`, `active`, `create_at`, `type`) VALUES
-(2, 'HENG', 'Vongkol', 'Male', 'hengvongkol@gmail.com', '234234', 'default.png', NULL, 'vongkol', '$2y$10$7Weubt2dmwGIW7GUEdhsiuLiIozlcBl7l3Aqy3CSPv3KNGLlS8Mh2', 1, 1, '2018-08-13 03:07:55', 'Shop Owner');
+(2, 'HENG', 'Vongkol', 'Male', 'hengvongkol@gmail.com', '234234', 'default.png', NULL, 'vongkol', '$2y$10$7Weubt2dmwGIW7GUEdhsiuLiIozlcBl7l3Aqy3CSPv3KNGLlS8Mh2', 1, 1, '2018-08-13 03:07:55', 'Other');
 
 -- --------------------------------------------------------
 
@@ -805,6 +894,14 @@ CREATE TABLE `transfers_categories` (
   `active` tinyint(4) NOT NULL DEFAULT '1',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `transfers_categories`
+--
+
+INSERT INTO `transfers_categories` (`id`, `name`, `active`, `create_at`) VALUES
+(1, 'Phone Shop', 1, '2018-08-14 00:58:13'),
+(2, 'Computer Shop', 1, '2018-08-14 00:58:23');
 
 -- --------------------------------------------------------
 
@@ -873,6 +970,18 @@ ALTER TABLE `company_categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customer_histories`
+--
+ALTER TABLE `customer_histories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `events`
 --
 ALTER TABLE `events`
@@ -882,6 +991,12 @@ ALTER TABLE `events`
 -- Indexes for table `event_categories`
 --
 ALTER TABLE `event_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `event_histories`
+--
+ALTER TABLE `event_histories`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1025,7 +1140,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `business_transfers`
 --
 ALTER TABLE `business_transfers`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `business_types`
@@ -1052,6 +1167,18 @@ ALTER TABLE `company_categories`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `customer_histories`
+--
+ALTER TABLE `customer_histories`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
@@ -1062,6 +1189,12 @@ ALTER TABLE `events`
 --
 ALTER TABLE `event_categories`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `event_histories`
+--
+ALTER TABLE `event_histories`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `menu_options`
@@ -1187,7 +1320,7 @@ ALTER TABLE `slides`
 -- AUTO_INCREMENT for table `transfers_categories`
 --
 ALTER TABLE `transfers_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

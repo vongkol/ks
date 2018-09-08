@@ -229,3 +229,7 @@ ul.pagination li a, ul.pagination li span{
 .hide{
     display:none;
 }
+.txt-small{
+    font-size: 11px;
+    color: #333;
+}

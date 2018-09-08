@@ -61,13 +61,18 @@
                 <!-- account -->
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <div class="account-section">
+                        @if(Session::has('customer'))
+                           
+                        @else
                         <ul>
-                            <li><a href="{{url('shop-owner/login')}}" class="title hidden-xs">Login</a></li>
+                            <li><a href="{{url('customer/login')}}" class="title hidden-xs">Login</a></li>
                             <li class="hidden-xs">|</li>
-                            <li><a href="{{url('shop-owner/register')}}" class="title hidden-xs">Register</a></li>
+                            <li><a href="{{url('customer/sign-up')}}" class="title hidden-xs">Register</a></li>
                             <li style="display: none"><a href="#" class="title"><i class="fa fa-shopping-cart"></i>   <sup class="cart-quantity">1</sup></a>
                             </li>
                         </ul>
+                        @endif
+                        
                     </div>
                     <!-- /.account -->
                 </div>
@@ -106,6 +111,19 @@
                                 </li>
                                 <li><a href="#">Career</a>
                                 <li><a href="{{url('/review')}}">Review</a>
+                                @if(Session::has('customer'))
+                                <li class="has-sub">
+                                    <a href="#">{{session('customer')->username}}</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('/customer/logout')}}">Logout</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                @endif
                                 @if(Session::has('user'))
                                 <li class="has-sub">
                                     <a href="#" class="text-danger">{{session('user')->first_name . ' ' . session('user')->last_name}}</a>

@@ -10,6 +10,48 @@ class FrontController extends Controller
 
     public function index()
     {
+        $customer = session('customer');
+        $m = date('m')-1;
+        $y = date('Y');
+        $data['recs'] = null;
+        $data['evts'] = null;
+        if($customer!=null)
+        {
+            $sql = "
+                select count(id) as counter, product_id from customer_histories where customer_id=$customer->id 
+                and month(create_at)>=$m and year(create_at)=$y  
+                group by product_id order by counter desc limit 8
+            ";
+            $histories = DB::select($sql);
+            if($histories!=null)
+            {
+                // select top 10 product id
+                $arr = array();
+                foreach($histories as $h)
+                {
+                    array_push($arr, $h->product_id);
+                }
+                $data['recs'] = DB::table('products')->whereIn('id', $arr)->get();
+            }
+            $sql1 = "
+                select count(id) as counter, category_id from event_histories where customer_id=$customer->id 
+                and month(create_at)>=$m and year(create_at)=$y  
+                group by category_id order by counter desc limit 8
+            ";
+            $evts = DB::select($sql1);
+            // var_dump($sql1);
+            // die();
+            if($evts!=null)
+            {
+                $arr1 = array();
+                foreach($evts as $evt)
+                {
+                    array_push($arr1, $evt->category_id);
+                }
+                $data['evts'] = DB::table('events')->whereIn('event_category', $arr1)
+                    ->where('active',1)->get();
+            }
+        }
         $data['categories'] = DB::table('product_categories')
             ->where('active', 1)
             ->where('parent_id', 0)
@@ -49,19 +91,6 @@ class FrontController extends Controller
     public function login(){
         return view('fronts.owners.login');
     }
-
-    public function product_list(){
-        return view('product-list');
-    }
-
-    public function product_single(){
-        return view('product-single');
-    }
-
-    public function cart(){
-        return view('cart');
-    }
-
     public function checkout(){
         return view('checkout');
     }
@@ -188,6 +217,18 @@ class FrontController extends Controller
         return view('fronts.events.event-list', $data);
     }
     public function event_detail($id){
+        $customer = session('customer');
+        if($customer!=null)
+        {
+            $evt = DB::table('events')->where('id', $id)->first();
+            $data = array(
+                'customer_id' => $customer->id,
+                'event_id' => $id,
+                'category_id' => $evt->event_category,
+                'create_at' => date('Y-m-d')
+            );
+            DB::table('event_histories')->insert($data);
+        }   
         $data['event'] = DB::table('events')
             ->where('active',1)
             ->where('id', $id)
@@ -301,6 +342,19 @@ class FrontController extends Controller
     }
 
     public function product_detail($id) {
+        $customer = session('customer');
+        
+        if($customer!=null)
+        {
+            $p = DB::table('products')->where('id', $id)->first();
+            $data = array(
+                'customer_id' => $customer->id,
+                'product_id' => $id,
+                'category_id' => $p->category_id,
+                'create_at' => date('Y-m-d')
+            );
+            DB::table('customer_histories')->insert($data);
+        }   
         $data['product'] = DB::table('products')
             ->join('product_categories', 'products.category_id', 'product_categories.id')
             ->join('shops', 'products.shop_id', 'shops.id')
