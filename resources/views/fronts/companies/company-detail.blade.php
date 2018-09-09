@@ -1,4 +1,7 @@
 @extends('layouts.front')
+@section('meta')
+<meta name="description" content="{{$company->name}} - {{$company->address}}">
+@endsection
 @section('content')
 <div class="box-head top-head">
     <h3 class="head-title text-center">Company Detail</h3>
@@ -39,6 +42,16 @@
                     <hr>
                       {!!$company->profile!!}
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>&nbsp;</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                    <div class="fb-share-button" data-href="{{url('/company-detail/'.$company->id)}}" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{url('/company-detail/'.$company->id)}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
             </div>
         </div>
     </div>

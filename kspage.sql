@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 08, 2018 at 06:25 PM
+-- Generation Time: Sep 09, 2018 at 06:20 PM
 -- Server version: 10.1.26-MariaDB-0+deb9u1
 -- PHP Version: 7.2.7-1+0~20180622080745.23+stretch~1.gbpfd8e2e
 
@@ -782,17 +782,18 @@ CREATE TABLE `shops` (
   `shop_owner` int(11) DEFAULT NULL,
   `active` tinyint(4) NOT NULL DEFAULT '1',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `description` longtext
+  `description` longtext,
+  `payment_method` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `shops`
 --
 
-INSERT INTO `shops` (`id`, `name`, `shop_category`, `address`, `phone`, `email`, `website`, `logo`, `shop_owner`, `active`, `create_at`, `description`) VALUES
-(1, 'Kohdaj Shop', 1, 'Phnom Penh, Cambodia', '086 397 627', 'info@kohdaj.com', 'www.kohdaj.com', '1logo-mtc.jpg', 1, 1, '2018-04-07 03:15:53', '<p>Test</p>'),
-(2, 'Kara Online Shop', 1, NULL, NULL, NULL, NULL, '2mtc-logo.jpg', 1, 1, '2018-05-06 08:13:08', NULL),
-(3, 'Online Shop Cambodia', 1, NULL, NULL, NULL, NULL, '3default.png', 1, 1, '2018-05-07 03:05:48', NULL);
+INSERT INTO `shops` (`id`, `name`, `shop_category`, `address`, `phone`, `email`, `website`, `logo`, `shop_owner`, `active`, `create_at`, `description`, `payment_method`) VALUES
+(1, 'Kohdaj Shop', 1, 'Phnom Penh, Cambodia', '086 397 627', 'info@kohdaj.com', 'www.kohdaj.com', '1logo-mtc.jpg', 1, 1, '2018-04-07 03:15:53', '<p>Test</p>', 'ABA Account: 000223964, Name: HENG Vongkol'),
+(2, 'Kara Online Shop', 1, NULL, NULL, NULL, NULL, '2mtc-logo.jpg', 1, 1, '2018-05-06 08:13:08', NULL, NULL),
+(3, 'Online Shop Cambodia', 1, NULL, NULL, NULL, NULL, '3default.png', 1, 1, '2018-05-07 03:05:48', NULL, NULL);
 
 -- --------------------------------------------------------
 

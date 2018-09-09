@@ -1,4 +1,7 @@
 @extends('layouts.front')
+@section('meta')
+<meta name="description" content="{{$event->title}} - {{$event->event_date}}">
+@endsection
 @section('content')
 <style>
      .price {
@@ -94,10 +97,21 @@
                         <hr>
                         <aside>{!!$event->description!!}</aside>
                         <hr>
+                        
                         <div>
                             @if($event->map!==null)
                             <iframe src="{{$event->map}}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                             @endif
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p>&nbsp;</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="fb-share-button" data-href="{{url('/event/detail/'.$event->id)}}" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{url('/event/detail/'.$event->id)}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,7 @@
 @extends('layouts.front')
+@section('meta')
+<meta name="description" content="{{$product->name}} - {{$product->short_description}}">
+@endsection
 @section('content')
     <div class="content">
         <div class="container">
@@ -36,13 +39,15 @@
                                     
                                         <p class="product-price" style="font-size: 38px;">$ {{$product->sell_price}} <strike>$ {{$product->price}}</strike></p>
                                         <p>{{$product->short_description}}</p>
-                                        <div class="product-quantity">
-                                            <h5>Quantity</h5>
-                                            <div class="quantity mb20">
-                                                <input type="number" class="input-text qty text" step="1" min="1" max="6" name="quantity" value="1" title="Qty" size="4" pattern="[0-9]*">
-                                            </div>
+                                        <h4><a href="{{url('/shop/detail/'.$shop->id)}}" target="_blank">{{$shop->name}}</a></h4>
+                                        <hr>
+                                        {{$shop->address}} <br>
+                                        Email: {{$shop->email}} <br>
+                                        Phone: {{$shop->phone}} <br>
+                                        <u>Payment Information</u>
+                                        <div>
+                                            {{$shop->payment_method}}
                                         </div>
-                                        <button type="submit" class="btn btn-default"><i class="fa fa-shopping-cart"></i>&nbsp;Add to cart</button>
                                     </div>
                                 </div>
                             </div>
@@ -65,6 +70,18 @@
             <div class="row">
                 <div class="col-md-12">
                     {!! $product->description!!}
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                        <div class="fb-share-button" data-href="{{url('/product/'.$product->id)}}" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{url('/product/'.$product->id)}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
                 </div>
             </div>
         </div>

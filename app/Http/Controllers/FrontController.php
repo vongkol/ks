@@ -361,6 +361,8 @@ class FrontController extends Controller
             ->where('products.id', $id)
             ->select('products.*', 'product_categories.name as cname', 'shops.name as sname')
             ->first();
+        $data['shop'] = DB::table('shops')->where('id', $data['product']->shop_id)->first();
+        
         $data['photos'] = DB::table('product_photos')
             ->where('product_id', $id)
             ->orderBy('id', 'desc')
