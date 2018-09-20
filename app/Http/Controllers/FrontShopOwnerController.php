@@ -66,9 +66,20 @@ class FrontShopOwnerController extends Controller
             'email' => $r->email,
             'phone' => $r->phone,
             'username' => $r->username,
-            'password' => bcrypt($r->password),
-            'type' => $r->type
+            'password' => bcrypt($r->password)
         );
+        if($r->post_product)
+            $data['post_product'] = 1;
+        if($r->post_company)
+            $data['post_company'] = 1;
+        if($r->post_school)
+            $data['post_school'] = 1;
+        if($r->post_event)
+            $data['post_event'] = 1;
+        if($r->post_review)
+            $data['post_review'] = 1;
+        if($r->post_transfer)
+            $data['post_transfer'] = 1;
         $counter = DB::table('shop_owners')
             ->where('username', $r->username)
             ->where('active', 1)
@@ -177,6 +188,48 @@ EOT;
             'address' => $r->address,
             'username' => $r->username
         );
+        if($r->post_product){
+            $data['post_product'] = 1;
+        }
+        else{
+            $data['post_product'] = 0;
+        }   
+        if($r->post_company)
+        {
+            $data['post_company'] = 1;
+        }
+        else{
+            $data['post_company'] = 0;
+        }
+        if($r->post_school)
+        {
+            $data['post_school'] = 1;
+        }
+        else{
+            $data['post_school'] = 0;
+        }
+            
+        if($r->post_event)
+        {
+            $data['post_event'] = 1;
+        }
+        else{
+            $data['post_event'] = 0;
+        }
+        if($r->post_review)
+        {
+            $data['post_review'] = 1;
+        }
+        else{
+            $data['post_review'] = 0;
+        } 
+        if($r->post_transfer)
+        {
+            $data['post_transfer'] = 1;
+        }
+        else{
+            $data['post_transfer'] = 0;
+        }
         if($r->hasFile('photo'))
         {
             $file = $r->file('photo');

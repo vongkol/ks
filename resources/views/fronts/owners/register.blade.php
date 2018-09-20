@@ -7,7 +7,7 @@
         <div class="row">
                
             <div class="col-sm-8">
-                <h3 class="mb10">Create Your Account</h3>
+                <h3 class="mb10">Power User - Create Your Account</h3>
                 <hr>
                 @if(Session::has('sms'))
                     <div class="alert alert-success" role="alert">
@@ -53,7 +53,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="type" class="control-label col-sm-3">Type <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
                             <select name="type" id="type" class="form-control">
@@ -61,7 +61,7 @@
                                 <option value="Other">Other</option>
                             </select>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group row">
                         <label for="address" class="control-label col-sm-3">Address</label>
                         <div class="col-sm-9">
@@ -111,8 +111,48 @@
                     </div>
                     <div>
                        
-                    </div>
+                </div>
                 
+            </div>
+            <div class="col-sm-4">
+                <h3>Choose What You Want To Post!</h3>
+                <hr>
+                <div class="form-group row">
+                    <input type="checkbox" value="1" name="post_product" id="post_product" checked>  &nbsp;
+                    <label for="post_product">
+                        Post Product
+                    </label>
+                </div>
+                <div class="form-group row">
+                    <input type="checkbox" value="1" name="post_company" id="post_company">  &nbsp;
+                    <label for="post_company">
+                        Post Company
+                    </label>
+                </div>
+                <div class="form-group row">
+                    <input type="checkbox" value="1" name="post_event" id="post_event">  &nbsp;
+                    <label for="post_event">
+                        Post Event
+                    </label>
+                </div>
+                <div class="form-group row">
+                    <input type="checkbox" value="1" name="post_school" id="post_school">  &nbsp;
+                    <label for="post_school">
+                        Post School
+                    </label>
+                </div>
+                <div class="form-group row">
+                    <input type="checkbox" value="1" name="post_review" id="post_review">  &nbsp;
+                    <label for="post_review">
+                        Post Review
+                    </label>
+                </div>
+                <div class="form-group row">
+                    <input type="checkbox" value="1" name="post_transfer" id="post_transfer">  &nbsp;
+                    <label for="post_transfer">
+                        Post Business Transfer
+                    </label>
+                </div>
             </div>
         </div>
             </form>

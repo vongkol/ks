@@ -67,6 +67,47 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="" class="control-label col-sm-3"><strong><u>What I will Post </u></strong></label>
+                            <div class="col-sm-9">
+                                <div>
+                                    <input type="checkbox" value="1" name="post_product" id="post_product" {{$user->post_product?'checked':''}}>  &nbsp;
+                                    <label for="post_product">
+                                        Post Product
+                                    </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="1" name="post_company" id="post_company" {{$user->post_company?'checked':''}}>  &nbsp;
+                                    <label for="post_company">
+                                        Post Company
+                                    </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="1" name="post_event" id="post_event" {{$user->post_event?'checked':''}}>  &nbsp;
+                                    <label for="post_event">
+                                        Post Event
+                                    </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="1" name="post_school" id="post_school" {{$user->post_school?'checked':''}}>  &nbsp;
+                                    <label for="post_school">
+                                        Post School
+                                    </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="1" name="post_review" id="post_review" {{$user->post_review?'checked':''}}>  &nbsp;
+                                    <label for="post_review">
+                                        Post Review
+                                    </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="1" name="post_transfer" id="post_transfer" {{$user->post_transfer?'checked':''}}>  &nbsp;
+                                    <label for="post_transfer">
+                                        Post Business Transfer
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="" class="control-label col-sm-3">&nbsp;</label>
                             <div class="col-sm-9">
                                 <button class="btn btn-primary btn-xs" type="submit">Save</button>

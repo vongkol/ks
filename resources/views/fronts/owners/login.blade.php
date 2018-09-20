@@ -5,7 +5,7 @@
             <div class="box">
                 <div class="row">
                     <div class="col-sm-7"> 
-                        <h3 class="mb10">Shop Owner Login</h3>
+                        <h3 class="mb10">Power User Login</h3>
                         <hr>
                         @if(Session::has('sms1'))
                             <div class="alert alert-danger" role="alert">

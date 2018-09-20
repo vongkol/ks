@@ -142,17 +142,45 @@
                                         <li>
                                             <a href="{{url('/owner/reset-password')}}">Reset Password</a>
                                         </li>
-                                        @if(session('user')->type=='Other')
                                         <li>
-                                            <a href="{{url('/owner/business-transfer')}}">Business Transfer</a>
+                                            <a href="{{url('/owner/shop')}}">My Shop / Company</a>
                                         </li>
-                                        @else
-                                        <li>
-                                            <a href="{{url('/owner/shop')}}">My Shop</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{url('/owner/product')}}">My Product</a>
-                                        </li>
+                                        @if(session('user')->post_product==1)
+                                            <li>
+                                                <a href="{{url('/owner/product')}}">Post Products</a>
+                                            </li>
+                                        @endif
+                                        @if(session('user')->post_company==1)
+                                            <li>
+                                                <a href="#">Post Companies</a>
+                                            </li>
+                                        @endif
+                                        @if(session('user')->post_event==1)
+                                            <li>
+                                                <a href="#">Post Events</a>
+                                            </li>
+                                        @endif
+                                        @if(session('user')->post_school==1)
+                                            <li>
+                                                <a href="#">Post Schools</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Post Scholarships</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Post School Programs</a>
+                                            </li>
+                                        @endif
+                                        @if(session('user')->post_review==1)
+                                            <li>
+                                                <a href="#">Post Review</a>
+                                            </li>
+                                        @endif
+                                        @if(session('user')->post_transfer==1)
+                                            <li>
+                                                <a href="{{url('/owner/business-transfer')}}">Post Business Transfer</a>
+                                            </li>
+                                       
                                         @endif
                                        
                                        
@@ -202,7 +230,7 @@
                     <div class="footer-widget">
                         <h3 class="footer-title">Policy Info</h3>
                         <ul class="arrow">
-                            <li><a href="{{url('shop-owner/login')}}">Shop Owner Login</a></li>
+                            <li><a href="{{url('shop-owner/login')}}">Power User Login</a></li>
                             <li><a href="#">Payments</a></li>
                             <li><a href="#">Cancellation &amp; Returns</a></li>
                             <li><a href="#">Shipping and Delivery</a></li>

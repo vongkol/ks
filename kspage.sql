@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 09, 2018 at 06:20 PM
+-- Generation Time: Sep 20, 2018 at 10:21 AM
 -- Server version: 10.1.26-MariaDB-0+deb9u1
 -- PHP Version: 7.2.7-1+0~20180622080745.23+stretch~1.gbpfd8e2e
 
@@ -843,15 +843,21 @@ CREATE TABLE `shop_owners` (
   `is_verified` tinyint(4) NOT NULL DEFAULT '0',
   `active` tinyint(4) NOT NULL DEFAULT '0',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `type` varchar(30) NOT NULL DEFAULT 'Shop Owner'
+  `type` varchar(30) NOT NULL DEFAULT 'Shop Owner',
+  `post_product` tinyint(4) NOT NULL DEFAULT '1',
+  `post_company` tinyint(4) NOT NULL DEFAULT '0',
+  `post_school` tinyint(4) NOT NULL DEFAULT '0',
+  `post_event` tinyint(4) NOT NULL DEFAULT '0',
+  `post_review` tinyint(4) NOT NULL DEFAULT '0',
+  `post_transfer` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `shop_owners`
 --
 
-INSERT INTO `shop_owners` (`id`, `first_name`, `last_name`, `gender`, `email`, `phone`, `photo`, `address`, `username`, `password`, `is_verified`, `active`, `create_at`, `type`) VALUES
-(2, 'HENG', 'Vongkol', 'Male', 'hengvongkol@gmail.com', '234234', 'default.png', NULL, 'vongkol', '$2y$10$7Weubt2dmwGIW7GUEdhsiuLiIozlcBl7l3Aqy3CSPv3KNGLlS8Mh2', 1, 1, '2018-08-13 03:07:55', 'Other');
+INSERT INTO `shop_owners` (`id`, `first_name`, `last_name`, `gender`, `email`, `phone`, `photo`, `address`, `username`, `password`, `is_verified`, `active`, `create_at`, `type`, `post_product`, `post_company`, `post_school`, `post_event`, `post_review`, `post_transfer`) VALUES
+(3, 'HENG', 'Vongkol', 'Male', 'hengvongkol@gmail.com', '234234', 'default.png', NULL, 'vongkol', '$2y$10$YIboa9mGeRUg8PRa4SGkLOlw6LejYgP226f5vLPu83f8kB3GxwRUq', 1, 1, '2018-09-09 11:52:29', 'Shop Owner', 1, 0, 1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1309,7 +1315,7 @@ ALTER TABLE `shop_categories`
 -- AUTO_INCREMENT for table `shop_owners`
 --
 ALTER TABLE `shop_owners`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `slides`
