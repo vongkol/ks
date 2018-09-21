@@ -157,7 +157,7 @@
                                         @endif
                                         @if(session('user')->post_event==1)
                                             <li>
-                                                <a href="#">Post Events</a>
+                                                <a href="{{url('/owner/event')}}">Post Events</a>
                                             </li>
                                         @endif
                                         @if(session('user')->post_school==1)

@@ -63,8 +63,9 @@
                 </div>
             </div>
             <div class="row">
-                <h4>Description</h4>
-                
+                <div class="col-sm-12">
+                    <h4>Description</h4>
+                </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">

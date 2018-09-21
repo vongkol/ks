@@ -48,7 +48,7 @@
                 <a class="nav-link" href="{{url('/admin/school-management')}}">Schools</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{url('/admin/review')}}">Reivews</a>
+                <a class="nav-link" href="{{url('/admin/review')}}">Reviews</a>
             </li>
             <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/event-management')}}">Events</a>

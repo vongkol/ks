@@ -3,7 +3,7 @@
    <div class="content bg-white">
        <div class="container">
             <p></p>
-            <h3 class="text-primary">Create New Product <a href="{{url('/owner/product')}}" class="btn btn-success btn-xs">Back</a></h3>
+            <h3 class="text-primary">Edit Event <a href="{{url('/owner/event')}}" class="btn btn-success btn-xs">Back</a></h3>
             <hr>
             @if(Session::has('sms'))
                 <div class="alert alert-success" role="alert">
@@ -25,19 +25,19 @@
                     </div>
                 </div>
             @endif
-            <form action="{{url('/owner/product/save')}}" class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <form action="{{url('/owner/event/update')}}" class="form-horizontal" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-sm-7">
-                   
                         {{csrf_field()}}
+                        <input type="hidden" value="{{$event->id}}" name="id">
                         <div class="form-group row">
-                            <label for="" class="control-label col-sm-3">Product Name <span class="text-danger">*</span></label>
+                            <label for="title" class="control-label col-sm-3">Title <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="name" value="{{old('name')}}" required class="form-control">
+                                <input type="text" name="title" value="{{$event->title}}" required class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="" class="control-label col-sm-3">Product Category <span class="text-danger">*</span></label>
+                            <label for="" class="control-label col-sm-3">Event Category <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
                                 <select name="category" id="category" class="form-control">
                                     @foreach($categories as $c)
@@ -47,56 +47,65 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="" class="control-label col-sm-3">Product Type <span class="text-danger">*</span></label>
+                            <label for="event_date" class="control-label col-sm-3">Event Date</label>
                             <div class="col-sm-9">
-                                <select name="type" id="type" class="form-control">
-                                   <option value="General">General</option>
-                                   <option value="Baby">Baby</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="control-label col-sm-3">Quantity</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" name="quantity" value="{{old('quantity')}}">
+                                <input type="text" class="form-control" placeholder="Jul, 01, 2018"  name="event_date" value="{{$event->event_date}}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="control-label col-sm-3">Price <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
-                                <input type="texxt" name="price" value="{{old('price')}}" class="form-control" required>
+                                <input type="texxt" name="price" placeholder="1.00"  value="{{$event->price}}" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="" class="control-label col-sm-3">Sale Price <span class="text-danger">*</span></label>
+                            <label for="start_time" class="control-label col-sm-3">Start Time <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" name="sell_price" value="{{old('sell_price')}}" class="form-control" required>
+                                <input type="text" name="start_time" placeholder="7:00 AM"  value="{{$event->start_time}}" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="" class="control-label col-sm-3">Short Description</label>
+                            <label for="end_time" class="control-label col-sm-3">End Time <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
-                                <textarea name="short_description" id="short_description" cols="30" rows="3" class="form-control"></textarea>
+                                <input type="text" name="end_time" placeholder="5:00 PM"  value="{{$event->end_time}}" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="event_organizor" class="control-label col-sm-3">Event Organizor</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="event_organizor" value="{{$event->event_organizor}}" class="form-control">
                             </div>
                         </div>
                 </div>
                 <div class="col-sm-5">
-                    <h4>Featured Image</h4>
-                    <img src="{{asset('uploads/products/featured/default.png')}}" alt="Photo" width="130" id="img">
+                    <h4>Featured Image <span class="text-danger">(1200x600)</span></h4>
+                    <img src="{{asset('uploads/events/featured_image/'.$event->featured_image)}}" alt="Photo" width="130" id="img">
                     <p></p>
                     <p>
-                        <input type="file" name="photo" onchange="loadFile(event)">
+                        <input type="file" name="featured_image" onchange="loadFile(event)">
                     </p>
                 </div>
             </div>
-            <div class="row">
+            <div class="form-group row">
+                <label for="map" class="control-label col-sm-3">Google Map Link</label>
                 <div class="col-sm-12">
-                    <h4>Product Description</h4>
+                    <input type="text" name="map" id="map" value="{{$event->map}}" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="register_link" class="control-label col-sm-3">Register Link</label>
+                <div class="col-sm-12">
+                    <input type="text" name="register_link" id="register_link" value="{{$event->register_link}}" class="form-control">
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+                    <h4>Event Description</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{$event->description}}</textarea>
                 </div>
             </div>
             <div class="row">

@@ -38,7 +38,7 @@
                         <div class="form-group row">
                             <label for="event_date" class="control-label col-sm-3 lb">Event Date <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" id="event_date" placeholder="Jul, 01, 2018" name="event_date" value="{{old('event_date')}}" class="form-control" required>
+                                <input type="text" id="event_date" placeholder="01, Jul, 2018" name="event_date" value="{{old('event_date')}}" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group row">

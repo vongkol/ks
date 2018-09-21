@@ -685,4 +685,171 @@ EOT;
         DB::table('business_transfers')->where('id', $r->id)->update(["active"=>0]);
         return redirect('/owner/business-transfer');
     }
+
+    public function event(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['events'] = DB::table('events')
+            ->join('event_categories', 'events.event_category', 'event_categories.id')
+            ->where('events.owner_id', $user->id)
+            ->where('events.active', 1)
+            ->orderBy('events.id', 'desc')
+            ->select('events.*', 'event_categories.name as cname')
+            ->paginate(20);
+        return view('fronts.owners.event', $data);
+    }
+    public function create_event(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['categories'] = DB::table('event_categories')
+            ->where('active', 1)
+            ->orderBy('name')
+            ->get();
+        return view('fronts.owners.create-event', $data);
+    }
+    public function save_event(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+
+        $data = array(
+            "title" => $r->title,
+            "location" => $r->location,
+            "event_date" => $r->event_date,
+            "description" => $r->description,
+            "event_category" => $r->category,
+            "featured_image" => $r->featured_image,
+            "event_organizor" => $r->event_organizor,
+            "start_time" => $r->start_time,
+            "end_time" => $r->end_time,
+            "map" => $r->map,
+            "price" => $r->price,
+            "register_link" => $r->register_link,
+            "owner_id" => $user->id,
+        );
+        $i = DB::table('events')->insertGetId($data);
+        if($r->hasFile('featured_image'))
+        {
+            
+            $file = $r->file('featured_image');
+            $file_name = $file->getClientOriginalName();
+            $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
+            $file_name = 'event' .$i . $ss;
+            // upload 350
+            $destinationPath = 'uploads/events/featured_image/small/';
+            $new_img = Image::make($file->getRealPath())->resize(350, null, function ($con) {
+                $con->aspectRatio();
+            });
+            $new_img->save($destinationPath . $file_name, 80);
+
+            $destinationPath = 'uploads/events/featured_image/';
+            $new_img = Image::make($file->getRealPath())->resize(1200,600);
+            $new_img->save($destinationPath . $file_name, 80);
+            $data['featured_image'] = $file_name;
+            DB::table('events')->where('id', $i)->update(['featured_image'=>$file_name]);
+        }
+      
+        if ($i)
+        {
+            $r->session()->flash("sms", "New event has been created successfully!");
+            return redirect("/owner/event/create");
+        } else {
+            $r->session()->flash("sms1", "Fail to create new event!");
+            return redirect("/owner/event/create")->withInput();
+        }  
+    }
+    public function edit_event(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['event'] = DB::table('events')
+            ->where('id', $r->id)
+            ->first();
+        $data['categories'] = DB::table('event_categories')
+            ->where('active', 1)
+            ->orderBy('name')
+            ->get();
+        return view('fronts.owners.edit-event', $data);
+    }
+    public function update_event(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+
+       
+        $data = array(
+            "title" => $r->title,
+            "location" => $r->location,
+            "event_date" => $r->event_date,
+            "description" => $r->description,
+            "event_category" => $r->category,
+            "featured_image" => $r->featured_image,
+            "event_organizor" => $r->event_organizor,
+            "start_time" => $r->start_time,
+            "end_time" => $r->end_time,
+            "map" => $r->map,
+            "price" => $r->price,
+            "register_link" => $r->register_link,
+            "owner_id" => $user->id,
+        );
+
+        if($r->hasFile('featured_image'))
+        {
+            
+            $file = $r->file('featured_image');
+            $file_name = $file->getClientOriginalName();
+            $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
+            $file_name = 'event' .$r->id . $ss;
+            // upload 350
+            $destinationPath = 'uploads/events/featured_image/small/';
+            $new_img = Image::make($file->getRealPath())->resize(350, null, function ($con) {
+                $con->aspectRatio();
+            });
+            $new_img->save($destinationPath . $file_name, 80);
+
+            $destinationPath = 'uploads/events/featured_image/';
+            $new_img = Image::make($file->getRealPath())->resize(1200,600);
+            $new_img->save($destinationPath . $file_name, 80);
+            $data['featured_image'] = $file_name;
+        }
+      
+        $i = DB::table('events')->where('id', $r->id)->update($data);
+        if ($i)
+        {
+            $r->session()->flash("sms", "All changes have saved successfully!");
+            return redirect("/owner/event/edit/".$r->id);
+        }
+        else
+        {
+            $r->session()->flash("sms1", "Fail to save change. You may not make any change!");
+            return redirect("/owner/event/edit/".$r->id);
+        }
+    }
+    public function delete_event(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        DB::table('events')->where('id', $r->id)->update(["active"=>0]);
+        return redirect('/owner/event');
+    }
 }
