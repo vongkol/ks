@@ -162,7 +162,7 @@
                                         @endif
                                         @if(session('user')->post_school==1)
                                             <li>
-                                                <a href="#">Post Schools</a>
+                                                <a href="{{url('/owner/school')}}">Post Schools</a>
                                             </li>
                                             <li>
                                                 <a href="#">Post Scholarships</a>

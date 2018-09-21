@@ -852,4 +852,154 @@ EOT;
         DB::table('events')->where('id', $r->id)->update(["active"=>0]);
         return redirect('/owner/event');
     }
+
+    public function create_school(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['categories'] = DB::table('school_categories')
+            ->where('active', 1)
+            ->orderBy('name')
+            ->get();
+        return view('fronts.owners.create-school', $data);
+    }
+    public function save_school(Request $request)
+    {
+        $user = $request->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+
+        $data = array(
+            "name_khmer" => $request->name_khmer,
+            "name_english" => $request->name_english,
+            "address" => $request->address,
+            "phone" => $request->phone,
+            "email" => $request->email,
+            "profile" => $request->profile,
+            "school_category" => $request->category,
+            "owner_id" => $user->id,
+        );
+        $i = DB::table('schools')->insertGetId($data);
+        if($i)
+        {
+            if($request->hasFile('logo'))
+            {
+                $file = $request->file('logo');
+                $file_name = $file->getClientOriginalName();
+                $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
+                $file_name = 'school' .$i . $ss;
+                // upload 150 
+                $destinationPath = 'uploads/schools/logo/';
+                $new_img = Image::make($file->getRealPath())->resize(150, null, function ($con) {
+                    $con->aspectRatio();
+                });
+               
+                $new_img->save($destinationPath . $file_name, 80);
+
+                DB::table('schools')->where('id', $i)->update(['logo'=>$file_name]);
+            
+            }
+
+            $request->session()->flash('sms', 'New school has been create successfully!');
+            return redirect('/owner/school/create');
+        }
+        else{
+            $request->session()->flash('sms1', 'Fail to create new school. Please check your input again!');
+            return redirect('/owner/school/create')->withInput();
+        }
+    }
+    public function edit_school(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['school'] = DB::table('schools')
+            ->where('id', $r->id)
+            ->first();
+        $data['categories'] = DB::table('school_categories')
+            ->where('active', 1)
+            ->orderBy('name')
+            ->get();
+        return view('fronts.owners.edit-school', $data);
+    }
+    public function update_school(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data = array(
+            "name_khmer" => $r->name_khmer,
+            "name_english" => $r->name_english,
+            "address" => $r->address,
+            "phone" => $r->phone,
+            "email" => $r->email,
+            "profile" => $r->profile,
+            "school_category" => $r->category,
+            "owner_id" => $user->id,
+        );
+
+        if($r->hasFile('logo'))
+        {
+            
+            $file = $request->file('logo');
+            $file_name = $file->getClientOriginalName();
+            $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
+            $file_name = 'school' .$r->id . $ss;
+            // upload 150 
+            $destinationPath = 'uploads/schools/logo/';
+            $new_img = Image::make($file->getRealPath())->resize(150, null, function ($con) {
+                $con->aspectRatio();
+            });
+            
+            $new_img->save($destinationPath . $file_name, 80);
+            $data['logo'] = $file_name;
+        }
+      
+        $i = DB::table('schools')->where('id', $r->id)->update($data);
+        if ($i)
+        {
+            $r->session()->flash("sms", "All changes have saved successfully!");
+            return redirect("/owner/school/edit/".$r->id);
+        }
+        else
+        {
+            $r->session()->flash("sms1", "Fail to save change. You may not make any change!");
+            return redirect("/owner/school/edit/".$r->id);
+        }
+    }
+    public function delete_school(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        DB::table('schools')->where('id', $r->id)->update(["active"=>0]);
+        return redirect('/owner/school');
+    }
+    public function school(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['schools'] = DB::table('schools')
+            ->join('school_categories', 'schools.school_category', 'school_categories.id')
+            ->where('schools.owner_id', $user->id)
+            ->where('schools.active', 1)
+            ->orderBy('schools.id', 'desc')
+            ->select('schools.*', 'school_categories.name as cname')
+            ->paginate(20);
+        return view('fronts.owners.school', $data);
+    }
 }

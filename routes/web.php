@@ -24,12 +24,22 @@ Route::get('/owner/product/edit', 'FrontShopOwnerController@edit_product');
 Route::get('/owner/product/delete/{id}', "FrontShopOwnerController@delete_product");
 Route::post('/owner/product/save', "FrontShopOwnerController@save_product");
 Route::post('/owner/product/update', "FrontShopOwnerController@update_product");
+// front event
 Route::get('/owner/event/create', "FrontShopOwnerController@create_event");
 Route::get('/owner/event', "FrontShopOwnerController@event");
 Route::post('/owner/event/save', "FrontShopOwnerController@save_event");
 Route::get('/owner/event/edit/{id}', "FrontShopOwnerController@edit_event");
 Route::post('/owner/event/update', "FrontShopOwnerController@update_event");
 Route::get('/owner/event/delete/{id}', "FrontShopOwnerController@delete_event");
+
+// front school
+Route::get('/owner/school/create', "FrontShopOwnerController@create_school");
+Route::get('/owner/school', "FrontShopOwnerController@school");
+Route::post('/owner/school/save', "FrontShopOwnerController@save_school");
+Route::get('/owner/school/edit/{id}', "FrontShopOwnerController@edit_school");
+Route::post('/owner/school/update', "FrontShopOwnerController@update_school");
+Route::get('/owner/school/delete/{id}', "FrontShopOwnerController@delete_school");
+
 Route::get('/owner/shop', "FrontShopOwnerController@shop");
 Route::get('/owner/shop/create', "FrontShopOwnerController@create_shop");
 Route::get('/owner/shop/edit', "FrontShopOwnerController@edit_shop");
