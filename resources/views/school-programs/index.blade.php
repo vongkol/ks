@@ -10,7 +10,7 @@
                 <tr>
                     <th>&numero;</th>
                     <th>Featured Image</th>
-                    <th>Name</th>
+                    <th>Title</th>
                     <th>School</th>
                     <th>Program Category</th>
                     <th>Actions</th>

@@ -152,7 +152,7 @@
                                         @endif
                                         @if(session('user')->post_company==1)
                                             <li>
-                                                <a href="#">Post Companies</a>
+                                                <a href="{{url('/owner/company')}}">Post Companies</a>
                                             </li>
                                         @endif
                                         @if(session('user')->post_event==1)
@@ -165,10 +165,10 @@
                                                 <a href="{{url('/owner/school')}}">Post Schools</a>
                                             </li>
                                             <li>
-                                                <a href="#">Post Scholarships</a>
+                                                <a href="{{url('/owner/scholarship')}}">Post Scholarships</a>
                                             </li>
                                             <li>
-                                                <a href="#">Post School Programs</a>
+                                                <a href="{{url('/owner/school-program')}}">Post School Programs</a>
                                             </li>
                                         @endif
                                         @if(session('user')->post_review==1)

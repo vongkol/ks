@@ -40,6 +40,31 @@ Route::get('/owner/school/edit/{id}', "FrontShopOwnerController@edit_school");
 Route::post('/owner/school/update', "FrontShopOwnerController@update_school");
 Route::get('/owner/school/delete/{id}', "FrontShopOwnerController@delete_school");
 
+// front scholaship
+Route::get('/owner/scholarship/create', "FrontShopOwnerController@create_scholaship");
+Route::get('/owner/scholarship', "FrontShopOwnerController@scholaship");
+Route::post('/owner/scholarship/save', "FrontShopOwnerController@save_scholaship");
+Route::get('/owner/scholarship/edit/{id}', "FrontShopOwnerController@edit_scholaship");
+Route::post('/owner/scholarship/update', "FrontShopOwnerController@update_scholaship");
+Route::get('/owner/scholarship/delete/{id}', "FrontShopOwnerController@delete_scholaship");
+
+
+// front school program
+Route::get('/owner/school-program/create', "FrontShopOwnerController@create_school_program");
+Route::get('/owner/school-program', "FrontShopOwnerController@school_program");
+Route::post('/owner/school-program/save', "FrontShopOwnerController@save_school_program");
+Route::get('/owner/school-program/edit/{id}', "FrontShopOwnerController@edit_school_program");
+Route::post('/owner/school-program/update', "FrontShopOwnerController@update_school_program");
+Route::get('/owner/school-program/delete/{id}', "FrontShopOwnerController@delete_school_program");
+
+// front company
+Route::get('/owner/company/create', "FrontShopOwnerController@create_company");
+Route::get('/owner/company', "FrontShopOwnerController@company");
+Route::post('/owner/company/save', "FrontShopOwnerController@save_company");
+Route::get('/owner/company/edit/{id}', "FrontShopOwnerController@edit_company");
+Route::post('/owner/company/update', "FrontShopOwnerController@update_company");
+Route::get('/owner/company/delete/{id}', "FrontShopOwnerController@delete_company");
+
 Route::get('/owner/shop', "FrontShopOwnerController@shop");
 Route::get('/owner/shop/create', "FrontShopOwnerController@create_shop");
 Route::get('/owner/shop/edit', "FrontShopOwnerController@edit_shop");
