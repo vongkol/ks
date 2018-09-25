@@ -65,6 +65,15 @@ Route::get('/owner/company/edit/{id}', "FrontShopOwnerController@edit_company");
 Route::post('/owner/company/update', "FrontShopOwnerController@update_company");
 Route::get('/owner/company/delete/{id}', "FrontShopOwnerController@delete_company");
 
+// front review
+Route::get('/owner/review/create', "FrontShopOwnerController@create_review");
+Route::get('/owner/review', "FrontShopOwnerController@review");
+Route::post('/owner/review/save', "FrontShopOwnerController@save_review");
+Route::get('/owner/review/edit/{id}', "FrontShopOwnerController@edit_review");
+Route::post('/owner/review/update', "FrontShopOwnerController@update_review");
+Route::get('/owner/review/delete/{id}', "FrontShopOwnerController@delete_review");
+
+
 Route::get('/owner/shop', "FrontShopOwnerController@shop");
 Route::get('/owner/shop/create', "FrontShopOwnerController@create_shop");
 Route::get('/owner/shop/edit', "FrontShopOwnerController@edit_shop");
