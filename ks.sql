@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 20, 2018 at 10:21 AM
--- Server version: 10.1.26-MariaDB-0+deb9u1
--- PHP Version: 7.2.7-1+0~20180622080745.23+stretch~1.gbpfd8e2e
+-- Generation Time: Sep 24, 2018 at 02:49 PM
+-- Server version: 5.7.23-0ubuntu0.16.04.1
+-- PHP Version: 7.0.31-1+ubuntu16.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `kspage`
+-- Database: `ks`
 --
 
 -- --------------------------------------------------------
@@ -48,7 +48,8 @@ INSERT INTO `business_transfers` (`id`, `title`, `category_id`, `short_descripti
 (1, 'Transfer Computer Shop for 2000$ only', 2, 'hello World', '1kunapheap-logo.png', 2, '<p>Some description</p>', 1, '2018-08-14 00:59:13'),
 (2, 'test hello world', 2, 'sdfasdfsadfsdfsdf', 'default.png', 2, '<p>sadfasdfasdfsadf</p>', 0, '2018-08-14 02:02:39'),
 (3, 'test hello world', 2, 'hello', '3header-logo.png', 1, '<p>some description</p>', 1, '2018-08-14 02:03:10'),
-(4, 'test', 2, 'yes', '4requirement.png', 1, '<p>sdfasdf</p>', 1, '2018-08-14 02:29:35');
+(4, 'test', 2, 'yes', '4requirement.png', 1, '<p>sdfasdf</p>', 1, '2018-08-14 02:29:35'),
+(5, 'test', 2, 'test', 'default.png', 3, '<p>test</p>', 1, '2018-09-21 02:41:29');
 
 -- --------------------------------------------------------
 
@@ -101,24 +102,29 @@ CREATE TABLE `companies` (
   `address` varchar(230) DEFAULT NULL,
   `office_phone` varchar(50) DEFAULT NULL,
   `office_email` varchar(50) DEFAULT NULL,
-  `logo` varchar(200) NOT NULL DEFAULT 'default.png',
+  `logo` varchar(200) DEFAULT 'default.png',
   `profile` text,
   `website` varchar(200) DEFAULT NULL,
   `active` tinyint(4) NOT NULL DEFAULT '1',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `category_id` int(11) DEFAULT NULL
+  `category_id` int(11) DEFAULT NULL,
+  `owner_id` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `companies`
 --
 
-INSERT INTO `companies` (`id`, `name`, `business_type`, `address`, `office_phone`, `office_email`, `logo`, `profile`, `website`, `active`, `create_at`, `category_id`) VALUES
-(1, 'Vdoo Solution', 1, '281 Preah Norodom Blvd (41), Room 601, 6th Floor,Tai Ming Plaza Hotel, Phnom Penh, Cambodia\r\n', '017 83 77 54', 'sales@vdoo.biz', 'default.png', 'More About Cambodia Yellow Pages\r\n023 993 305 Yellow Pages Directory Assistant open from Monday to Friday (8:00am to 5:00pm).\r\nFind what you need more Easily, Faster and in more ways with Cambodia Yellow Pages.The Cambodia Yellow Pages 2018 is Available!\r\n\r\nFor your FREE copy please call to 023 993 305 \r\n\r\nYellow Pages on your mobile phone. \r\n\r\nPlease go to www.yp.com.kh by using your internet mobile phone\r\nNew! Pocket Master Map is Coming Soon!\r\n\r\nThe most easy way to find the location.', 'https://www.linkedin.com/feed/', 1, '2018-04-07 07:23:32', 1),
-(2, 'Cambodia HR Angkor', 1, 'Borey Solary Phone Penh', '010292838', 'sorvichey@gmai.com', '2mtc-logo.jpg', '<p>test</p>', 'www.abc', 1, '2018-05-04 04:56:13', 1),
-(3, 'Cambodia HR Angkor', 1, '281 Preah Norodom Blvd (41), Room 601, 6th Floor,Tai Ming Plaza Hotel, Phnom Penh, Cambodia', '010292838', 'sorvichey@gmai.com', '3logo-mtc.png', '<p>test</p>', 'www.abc', 1, '2018-05-04 04:56:14', 1),
-(4, 'Vdoo', 1, 'test', 'test', 'test@gmail.com', '4mtc-logo-old.jpg', '<p>test</p>\r\n\r\n<p>&nbsp;</p>', NULL, 1, '2018-05-05 16:12:29', 1),
-(5, 'test', 1, NULL, NULL, NULL, 'default.png', NULL, NULL, 0, '2018-05-05 16:13:19', NULL);
+INSERT INTO `companies` (`id`, `name`, `business_type`, `address`, `office_phone`, `office_email`, `logo`, `profile`, `website`, `active`, `create_at`, `category_id`, `owner_id`) VALUES
+(1, 'Vdoo Solution', 1, '281 Preah Norodom Blvd (41), Room 601, 6th Floor,Tai Ming Plaza Hotel, Phnom Penh, Cambodia\r\n', '017 83 77 54', 'sales@vdoo.biz', 'default.png', 'More About Cambodia Yellow Pages\r\n023 993 305 Yellow Pages Directory Assistant open from Monday to Friday (8:00am to 5:00pm).\r\nFind what you need more Easily, Faster and in more ways with Cambodia Yellow Pages.The Cambodia Yellow Pages 2018 is Available!\r\n\r\nFor your FREE copy please call to 023 993 305 \r\n\r\nYellow Pages on your mobile phone. \r\n\r\nPlease go to www.yp.com.kh by using your internet mobile phone\r\nNew! Pocket Master Map is Coming Soon!\r\n\r\nThe most easy way to find the location.', 'https://www.linkedin.com/feed/', 1, '2018-04-07 07:23:32', 1, 0),
+(2, 'Cambodia HR Angkor', 1, 'Borey Solary Phone Penh', '010292838', 'sorvichey@gmai.com', '2mtc-logo.jpg', '<p>test</p>', 'www.abc', 1, '2018-05-04 04:56:13', 1, 0),
+(3, 'Cambodia HR Angkor', 1, '281 Preah Norodom Blvd (41), Room 601, 6th Floor,Tai Ming Plaza Hotel, Phnom Penh, Cambodia', '010292838', 'sorvichey@gmai.com', '3logo-mtc.png', '<p>test</p>', 'www.abc', 1, '2018-05-04 04:56:14', 1, 0),
+(4, 'Vdoo', 1, 'test', 'test', 'test@gmail.com', '4mtc-logo-old.jpg', '<p>test</p>\r\n\r\n<p>&nbsp;</p>', NULL, 1, '2018-05-05 16:12:29', 1, 0),
+(5, 'test', 1, NULL, NULL, NULL, 'default.png', NULL, NULL, 0, '2018-05-05 16:13:19', NULL, 0),
+(6, 'Vichey', 2, '12345y7iop', '34567890-', '34567890', '6សស.jpg', '<p>Test</p>', '234567890', 0, '2018-09-22 07:24:01', NULL, 3),
+(7, 'Hello baby111111111', 3, 'Address', '0029938838', 'sorvichey@gmail.com', '7ស.jpg', '<p>Test test</p>', 'www.abc.com', 1, '2018-09-22 07:29:38', 4, 3),
+(8, 'Vichey3456789', 1, 'wertyuio34567iop', 'ertyui4567uio', 'wertyui', '8សសស.jpg', '<p>Test</p>', '23456yuio', 1, '2018-09-22 07:49:45', 2, 3),
+(9, 'សប្បាយដើ', 1, 'Address', '0029938838', '12345678', '9ក.jpg', '<p>Testing</p>', '123456789', 1, '2018-09-22 07:54:03', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -219,27 +225,37 @@ CREATE TABLE `events` (
   `end_time` varchar(30) NOT NULL,
   `map` text,
   `price` varchar(50) NOT NULL DEFAULT 'Free',
-  `register_link` text
+  `register_link` text,
+  `owner_id` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`id`, `title`, `location`, `event_date`, `description`, `event_category`, `featured_image`, `event_organizor`, `active`, `create_at`, `start_time`, `end_time`, `map`, `price`, `register_link`) VALUES
-(1, 'JCI Cambodia Public Speaking & Debating ', 'CamEd Business School', 'May 6, 2018', '<p>Our two Cambodians have an opportunity to attend the eFounders Fellowship program, now they are happy to share what they have learned during the 11 days program to the Cambodian Startup Community in Phnom Penh. \r\n\r\nMr. Chea Langda, CEO of Bookmebus and Mr. Sim Chankiriroth, CEO of Banhji are willing to share with the Tech & Startup Community at Emerald HUB co-working space.\r\n\r\nLocation: Emerald HUB\r\n\r\nDate: May 1st, 2018 ; Tuesday \r\n\r\nTime: 5:30-pm to 7:30pm</p>', 1, NULL, 'Mr. Sor Vichey', 0, '2018-05-04 01:47:14', ' 05:30 PM', '07:30 PM', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31272.868640155637!2d104.88498529622686!3d11.544068225408784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951add5e2cd81%3A0x171e0b69c7c6f7ba!2sPasserelles+num%C3%A9riques+Cambodia+(PNC)!5e0!3m2!1sen!2skh!4v1525408157219', 'Free', ''),
-(2, 'Open Talk: Alibaba eFounders Sharing', ' Emerald HUB', 'May 1st, 2018', 'test', 1, 'default.svg', '', 0, '2018-05-04 02:37:40', ' 5:30-pm', '8:30-pm', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31272.868640155637!2d104.88498529622686!3d11.544068225408784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951add5e2cd81%3A0x171e0b69c7c6f7ba!2sPasserelles+num%C3%A9riques+Cambodia+(PNC)!5e0!3m2!1sen!2skh!4v1525408157219', '$ 1.50', ''),
-(3, 'Open Talk: Alibaba eFounders Sharing', 'Emerald HUB', 'May 1st, 2018', '<p>test</p>', 1, 'default.svg', 'Mr.Sam Rithy', 0, '2018-05-04 02:37:42', '5:30-pm', '8:30-pm', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31272.868640155637!2d104.88498529622686!3d11.544068225408784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951add5e2cd81%3A0x171e0b69c7c6f7ba!2sPasserelles+num%C3%A9riques+Cambodia+(PNC)!5e0!3m2!1sen!2skh!4v1525408157219', '$ 5.00', NULL),
-(4, 'JCI Cambodia Public Speaking & Debating Championship 2018', 'Borey Pipobtmey', 'July, 9, 2010', '<p>test</p>', 4, 'event4.jpeg', 'test', 1, '2018-05-04 02:39:15', '3:30-pm', '9:30-pm', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31272.868640155637!2d104.88498529622686!3d11.544068225408784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951add5e2cd81%3A0x171e0b69c7c6f7ba!2sPasserelles+num%C3%A9riques+Cambodia+(PNC)!5e0!3m2!1sen!2skh!4v1525408157219', 'Free', 'https://www.vdoo.biz'),
-(5, 'JCI Cambodia Public Speaking p 2018', 'Borey Pipobtmey', 'July, 9, 2010', 'test', 1, NULL, 'test', 0, '2018-05-04 02:39:20', '3:30-pm', ' 9:30-pm', NULL, 'Free', ''),
-(6, 'New Innovation Idea Test', 'Phnom Penh', 'May, 9, 2019', '<p>testtest</p>', 7, 'event6.jpeg', 'Mr.Sor Vichey', 1, '2018-05-05 09:48:55', '10:00 AM', '11:00 PM', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31272.868640155637!2d104.88498529622686!3d11.544068225408784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951add5e2cd81%3A0x171e0b69c7c6f7ba!2sPasserelles+num%C3%A9riques+Cambodia+(PNC)!5e0!3m2!1sen!2skh!4v1525408157219', '1.00', '11'),
-(7, 'New', 'Phnom Penh', 'Jul, 20, 2019', NULL, 2, NULL, 'Mr. Sor Vichey', 0, '2018-05-05 15:50:30', '1:00 PM', '11:00 AM', '123', '10', '123'),
-(8, 'New', 'Phnom Penh', 'Jul, 20, 2019', '<p>test</p>', 2, NULL, 'Mr. Sor Vichey', 0, '2018-05-05 15:50:38', '1:00 PM', '11:00 AM', '1231', '10', '1231'),
-(9, 'test', 'Phnom Penh', 'May, 9, 2019', NULL, 4, 'event9.jpeg', NULL, 1, '2018-07-06 08:16:33', '10:00 AM', '11:00 AM', NULL, '0', NULL),
-(10, 'test', 'Phnom Penh', 'May, 9, 2019', '<p>test</p>', 2, 'event10.jpeg', NULL, 1, '2018-07-06 08:30:19', '10:00 AM', '1', NULL, '2.00', NULL),
-(11, 'About Us', 'Phnom Penh', 'May, 9, 2019', '<p>test</p>', 2, NULL, 'Mr.Sor Vichey', 0, '2018-07-06 09:10:04', '10:00 AM', '11:00 AM', NULL, '1.00', NULL),
-(12, 'About Us', 'Phnom Penh', 'May, 9, 2019', '<p>test</p>', 2, 'event12.jpeg', 'Mr.Sor Vichey', 1, '2018-07-06 09:10:20', '10:00 AM', '11:00 AM', NULL, '1.00', NULL),
-(13, 'test', 'Phnom Penh', 'May, 9, 2019', NULL, 3, 'event13.jpeg', 'Mr.Sor Vichey', 1, '2018-07-06 09:14:07', '10:00 AM', '11:00 AM', NULL, '10.00', NULL);
+INSERT INTO `events` (`id`, `title`, `location`, `event_date`, `description`, `event_category`, `featured_image`, `event_organizor`, `active`, `create_at`, `start_time`, `end_time`, `map`, `price`, `register_link`, `owner_id`) VALUES
+(1, 'JCI Cambodia Public Speaking & Debating ', 'CamEd Business School', 'May 6, 2018', '<p>Our two Cambodians have an opportunity to attend the eFounders Fellowship program, now they are happy to share what they have learned during the 11 days program to the Cambodian Startup Community in Phnom Penh. \r\n\r\nMr. Chea Langda, CEO of Bookmebus and Mr. Sim Chankiriroth, CEO of Banhji are willing to share with the Tech & Startup Community at Emerald HUB co-working space.\r\n\r\nLocation: Emerald HUB\r\n\r\nDate: May 1st, 2018 ; Tuesday \r\n\r\nTime: 5:30-pm to 7:30pm</p>', 1, NULL, 'Mr. Sor Vichey', 0, '2018-05-04 01:47:14', ' 05:30 PM', '07:30 PM', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31272.868640155637!2d104.88498529622686!3d11.544068225408784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951add5e2cd81%3A0x171e0b69c7c6f7ba!2sPasserelles+num%C3%A9riques+Cambodia+(PNC)!5e0!3m2!1sen!2skh!4v1525408157219', 'Free', '', 0),
+(2, 'Open Talk: Alibaba eFounders Sharing', ' Emerald HUB', 'May 1st, 2018', 'test', 1, 'default.svg', '', 0, '2018-05-04 02:37:40', ' 5:30-pm', '8:30-pm', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31272.868640155637!2d104.88498529622686!3d11.544068225408784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951add5e2cd81%3A0x171e0b69c7c6f7ba!2sPasserelles+num%C3%A9riques+Cambodia+(PNC)!5e0!3m2!1sen!2skh!4v1525408157219', '$ 1.50', '', 0),
+(3, 'Open Talk: Alibaba eFounders Sharing', 'Emerald HUB', 'May 1st, 2018', '<p>test</p>', 1, 'default.svg', 'Mr.Sam Rithy', 0, '2018-05-04 02:37:42', '5:30-pm', '8:30-pm', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31272.868640155637!2d104.88498529622686!3d11.544068225408784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951add5e2cd81%3A0x171e0b69c7c6f7ba!2sPasserelles+num%C3%A9riques+Cambodia+(PNC)!5e0!3m2!1sen!2skh!4v1525408157219', '$ 5.00', NULL, 0),
+(4, 'JCI Cambodia Public Speaking & Debating Championship 2018', 'Borey Pipobtmey', 'July, 9, 2010', '<p>test</p>', 4, 'event4.jpeg', 'test', 1, '2018-05-04 02:39:15', '3:30-pm', '9:30-pm', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31272.868640155637!2d104.88498529622686!3d11.544068225408784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951add5e2cd81%3A0x171e0b69c7c6f7ba!2sPasserelles+num%C3%A9riques+Cambodia+(PNC)!5e0!3m2!1sen!2skh!4v1525408157219', 'Free', 'https://www.vdoo.biz', 0),
+(5, 'JCI Cambodia Public Speaking p 2018', 'Borey Pipobtmey', 'July, 9, 2010', 'test', 1, NULL, 'test', 0, '2018-05-04 02:39:20', '3:30-pm', ' 9:30-pm', NULL, 'Free', '', 0),
+(6, 'New Innovation Idea Test', 'Phnom Penh', 'May, 9, 2019', '<p>testtest</p>', 7, 'event6.jpeg', 'Mr.Sor Vichey', 1, '2018-05-05 09:48:55', '10:00 AM', '11:00 PM', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31272.868640155637!2d104.88498529622686!3d11.544068225408784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951add5e2cd81%3A0x171e0b69c7c6f7ba!2sPasserelles+num%C3%A9riques+Cambodia+(PNC)!5e0!3m2!1sen!2skh!4v1525408157219', '1.00', '11', 0),
+(7, 'New', 'Phnom Penh', 'Jul, 20, 2019', NULL, 2, NULL, 'Mr. Sor Vichey', 0, '2018-05-05 15:50:30', '1:00 PM', '11:00 AM', '123', '10', '123', 0),
+(8, 'New', 'Phnom Penh', 'Jul, 20, 2019', '<p>test</p>', 2, NULL, 'Mr. Sor Vichey', 0, '2018-05-05 15:50:38', '1:00 PM', '11:00 AM', '1231', '10', '1231', 0),
+(9, 'test', 'Phnom Penh', 'May, 9, 2019', NULL, 4, 'event9.jpeg', NULL, 1, '2018-07-06 08:16:33', '10:00 AM', '11:00 AM', NULL, '0', NULL, 0),
+(10, 'test', 'Phnom Penh', 'May, 9, 2019', '<p>test</p>', 2, 'event10.jpeg', NULL, 1, '2018-07-06 08:30:19', '10:00 AM', '1', NULL, '2.00', NULL, 0),
+(11, 'About Us', 'Phnom Penh', 'May, 9, 2019', '<p>test</p>', 2, NULL, 'Mr.Sor Vichey', 0, '2018-07-06 09:10:04', '10:00 AM', '11:00 AM', NULL, '1.00', NULL, 0),
+(12, 'About Us', 'Phnom Penh', 'May, 9, 2019', '<p>test</p>', 2, 'event12.jpeg', 'Mr.Sor Vichey', 1, '2018-07-06 09:10:20', '10:00 AM', '11:00 AM', NULL, '1.00', NULL, 0),
+(13, 'test', 'Phnom Penh', 'May, 9, 2019', NULL, 3, 'event13.jpeg', 'Mr.Sor Vichey', 1, '2018-07-06 09:14:07', '10:00 AM', '11:00 AM', NULL, '10.00', NULL, 0),
+(14, 'test', 'bokor', '01, Jul, 2018', NULL, 6, 'event14.JPG', 'Vichey', 1, '2018-09-21 04:25:41', '1:00pm', '10:200pm', NULL, '10', NULL, 0),
+(15, 'About Us', NULL, '10, Jul, 2023', '<p>Test</p>', NULL, NULL, 'Vichey', 1, '2018-09-21 04:36:25', '1:00pm', '10:200pm', 'test', '100', '1122', 3),
+(16, 'About Us', NULL, '10, Jul, 2023', '<p>Test</p>', NULL, NULL, 'Vichey', 1, '2018-09-21 04:36:59', '1:00pm', '10:200pm', 'test', '100', '1122', 3),
+(17, 'About Us', NULL, '10, Jul, 2023', '<p>Test</p>', NULL, NULL, 'Vichey', 1, '2018-09-21 04:38:45', '1:00pm', '10:200pm', 'test', '100', '1122', 3),
+(18, '111111111111111', NULL, '10, Jul, 2023', '<p>Test</p>', NULL, 'event18.jpg', 'Vichey', 1, '2018-09-21 04:39:36', '1:00pm', '10:200pm', 'test', '100', '1122', 3),
+(19, '111111111111111', NULL, '10, Jul, 2023', '<p>Test</p>', 8, 'event19.jpg', 'Vichey', 1, '2018-09-21 04:40:51', '1:00pm', '10:200pm', 'test', '100', '1122', 3),
+(20, 'ទាំង​ល្បី ស្អាត ឆ្លាត តារាថៃទាំង​នេះ​ក៏សុទ្ធមានសំណាងកើត​មក​លើគំនរមាសប្រាក់ដែរ', NULL, '01, Jul, 2018', '<p>Test</p>', 6, 'event20.jpg', 'Vichey', 1, '2018-09-21 11:01:13', '1:00pm', '10:200pm', NULL, '100', NULL, 3),
+(21, 'ទាំង​ល្បី ស្អាត ឆ្លាត តារាថៃទាំង​នេះ​ក៏សុទ្ធមានសំណាងកើត​មក​លើគំនរមាសប្រាក់ដែរ', NULL, '01, Jul, 2018', '<p>Test</p>', 8, NULL, 'Vichey', 0, '2018-09-21 11:09:38', '1:00pm', '10:200pm', 'test', '100', '1234567890-', 3),
+(22, 'Akp', NULL, '01, Jul, 2018', '<p>Test</p>', 8, 'event22.jpg', 'Vichey', 1, '2018-09-21 11:10:03', '1:00pm', '10:200pm', 'test', '100', '1234567890-', 3);
 
 -- --------------------------------------------------------
 
@@ -398,7 +414,8 @@ INSERT INTO `products` (`id`, `name`, `category_id`, `shop_id`, `price`, `sell_p
 (6, 'Iphone 8', 1, 2, 200, 150, 'pro6.jpg', 'test', '<p>test</p>', 1, '2018-07-06 06:15:57', 1, 'General', 1, 0),
 (7, 'Phone 6', 4, 2, 0, 0, 'pro7.jpg', '1', '<p>test</p>', 1, '2018-07-06 06:19:27', 1, 'Baby', 1, 0),
 (8, 'Sample Baby Pro', 4, 1, 70, 50, 'pro8.jpg', 'This is the sample product.', '<p>This is the sample product for baby shop!</p>', 1, '2018-07-21 09:29:27', 10, 'Baby', NULL, 0),
-(11, 'test', 15, 1, 10, 8, 'pro34xrwe11.png', 'test edit', '<p>test</p>', 1, '2018-08-12 11:29:08', 100, 'General', NULL, 0);
+(11, 'test', 15, 1, 10, 8, 'pro34xrwe11.png', 'test edit', '<p>test</p>', 1, '2018-08-12 11:29:08', 100, 'General', NULL, 0),
+(12, 'Hello', 5, 4, 100, 100, 'pro34xrwe12.jpg', 'Test', '<p>Test</p>', 1, '2018-09-20 15:11:55', 10, 'General', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -634,16 +651,23 @@ CREATE TABLE `scholarships` (
   `active` tinyint(4) NOT NULL DEFAULT '1',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `scholarship_category` int(11) DEFAULT NULL,
-  `featured_image` varchar(120) DEFAULT NULL
+  `featured_image` varchar(120) DEFAULT NULL,
+  `owner_id` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `scholarships`
 --
 
-INSERT INTO `scholarships` (`id`, `title`, `description`, `school_id`, `active`, `create_at`, `scholarship_category`, `featured_image`) VALUES
-(1, '10 FLOORS PROJECT', NULL, 1, 1, '2018-07-08 08:09:32', 3, 'scholarship1.jpg'),
-(2, '10 FLOORS PROJECT', '<p>test</p>', 1, 1, '2018-07-08 08:12:20', 1, 'scholarship2.jpg');
+INSERT INTO `scholarships` (`id`, `title`, `description`, `school_id`, `active`, `create_at`, `scholarship_category`, `featured_image`, `owner_id`) VALUES
+(1, '10 FLOORS PROJECT', NULL, 1, 1, '2018-07-08 08:09:32', 3, 'scholarship1.jpg', 0),
+(2, '10 FLOORS PROJECT', '<p>test</p>', 1, 1, '2018-07-08 08:12:20', 1, 'scholarship2.jpg', 0),
+(3, 'ittle', '<p>wertyuiop[;nbvnm,</p>', 7, 1, '2018-09-22 05:02:09', NULL, NULL, 3),
+(4, 'ittle', '<p>wertyuiop[;nbvnm,</p>', 7, 1, '2018-09-22 05:02:30', NULL, 'scholarship4.jpg', 3),
+(5, 'title11111111 title', '<p>dfghjp;kjhgvbnm,.sdfasdfasdfasdf</p>', 1, 1, '2018-09-22 05:03:08', 2, 'scholarship5.png', 3),
+(6, 'title asdfsadfsd', '<p>eghjkl</p>', 4, 0, '2018-09-22 05:03:45', 1, NULL, 3),
+(7, 'ទាំង​ល្បី ស្អាត ឆ្លាត តារាថៃទាំង​នេះ​ក៏សុទ្ធមានសំណាងកើត​មក​លើគំនរមាសប្រាក់ដែរ', '<p>Test</p>', 2, 1, '2018-09-22 06:06:51', 2, 'scholarship7.jpg', 3),
+(8, 'wertyuiop', '<p>Test</p>', 3, 1, '2018-09-22 06:29:28', 2, 'scholarship8.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -686,17 +710,26 @@ CREATE TABLE `schools` (
   `profile` text,
   `logo` varchar(200) DEFAULT 'default.png',
   `active` tinyint(4) NOT NULL DEFAULT '1',
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `school_id` int(11) DEFAULT '0',
+  `owner_id` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `schools`
 --
 
-INSERT INTO `schools` (`id`, `name_khmer`, `name_english`, `address`, `phone`, `email`, `school_category`, `profile`, `logo`, `active`, `create_at`) VALUES
-(1, 'សកលវិទ្យល័យធនធានមនុស្ស', 'University of Human Resource', 'test', '010273732', 'test@gmail.com', 4, '<p>Test test</p>\r\n\r\n<p>&nbsp;</p>', '1school1.ico', 1, '2018-04-07 04:40:58'),
-(2, 'សកលវិទ្យល័យអាសី អី រុប', 'University of AEU', 'Cambodia, Phnom Penh, Brey Pepotery, #1223', '010293838', 'aeu@gmail.com', 5, '<p>test</p>', '2logo.jpg', 1, '2018-05-05 17:06:00'),
-(3, 'សកលវិទ្យល័យអាសី អី រុប', 'University of AEU', 'Cambodia, Phnom Penh, Brey Pepotery, #1223', '010293838', 'aeu@gmail.com', 5, '<p>test</p>', '33-ArengLogo01.ico', 1, '2018-05-05 17:06:49');
+INSERT INTO `schools` (`id`, `name_khmer`, `name_english`, `address`, `phone`, `email`, `school_category`, `profile`, `logo`, `active`, `create_at`, `school_id`, `owner_id`) VALUES
+(1, 'សកលវិទ្យល័យធនធានមនុស្ស', 'University of Human Resource', 'test', '010273732', 'test@gmail.com', 4, '<p>Test test</p>\r\n\r\n<p>&nbsp;</p>', '1school1.ico', 1, '2018-04-07 04:40:58', 0, 0),
+(2, 'សកលវិទ្យល័យអាសី អី រុប', 'University of AEU', 'Cambodia, Phnom Penh, Brey Pepotery, #1223', '010293838', 'aeu@gmail.com', 5, '<p>test</p>', '2logo.jpg', 1, '2018-05-05 17:06:00', 0, 0),
+(3, 'សកលវិទ្យល័យអាសី អី រុប', 'University of AEU', 'Cambodia, Phnom Penh, Brey Pepotery, #1223', '010293838', 'aeu@gmail.com', 5, '<p>test</p>', '33-ArengLogo01.ico', 1, '2018-05-05 17:06:49', 0, 0),
+(4, 'សង្ហបូរី', 'Khmer name', 'Address', '0192837777', 'sorvichey@gmail.com', 5, NULL, 'school4.jpg', 1, '2018-09-21 13:24:28', 0, 0),
+(5, 'សង្ហបូរី', 'Khmer name', 'Address', '0962555209', 'admin@gmail.com', 5, NULL, 'school5.jpg', 1, '2018-09-21 13:24:53', 0, 0),
+(6, 'សង្ហបូរី', 'Khmer name', 'Address', '0962555209', 'bottreynoname@gmail.com', 2, 'Infomation', 'school6.jpg', 0, '2018-09-21 13:35:03', 0, 3),
+(7, 'test', 'test', '1234567', '0962555209', 'sorvichey@gmail.com', 8, '<p>Test</p>', 'school7.jpg', 1, '2018-09-21 13:36:57', 0, 3),
+(8, 'សង្ហបូរី', 'Khmer name', 'Address', '0962555209', 'admin@gmail.com', 6, '<p>sddffyguhfgf</p>', 'school8.jpg', 1, '2018-09-21 13:37:19', 0, 3),
+(9, 'Vichey', 'sor', '1234567', '01029983', 'bottreynoname@gmail.com', 3, '<p>Test</p>', 'default.png', 0, '2018-09-21 13:53:52', 0, 3),
+(10, 'សង្ហបូរី1111111111', 'Khmer name', '1234567', '0962555209', 'hengvongkol@gmail.com', 3, '<p>សដថសដ23456789</p>', 'school10.jpg', 1, '2018-09-21 13:54:51', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -739,30 +772,36 @@ CREATE TABLE `school_programs` (
   `active` tinyint(4) NOT NULL DEFAULT '1',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `program_category` int(11) DEFAULT NULL,
-  `featured_image` varchar(120) DEFAULT NULL
+  `featured_image` varchar(120) DEFAULT NULL,
+  `owner_id` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `school_programs`
 --
 
-INSERT INTO `school_programs` (`id`, `title`, `description`, `school_id`, `active`, `create_at`, `program_category`, `featured_image`) VALUES
-(1, 'Test', '<p><span style=\"color:#c0392b\">Test</span></p>', 3, 0, '2018-04-07 04:52:58', 2, ''),
-(2, 'Test', '<p>test</p>', 1, 0, '2018-05-06 04:14:15', 1, ''),
-(3, 'test', '<p>test</p>', 3, 0, '2018-05-06 04:14:29', 3, ''),
-(4, 'test', '<p>test</p>\r\n\r\n<p>&nbsp;</p>', 2, 1, '2018-05-06 04:34:36', 1, ''),
-(5, 'test', NULL, 1, 0, '2018-05-06 04:48:31', 1, ''),
-(6, 'Computer Science and Engineering', '<p>Sample description here...</p>', 1, 1, '2018-05-21 08:14:01', 1, 'school_program6.jpg'),
-(7, 'te', NULL, 1, 1, '2018-07-08 05:02:46', 1, 'school_program7.jpg'),
-(8, 'te', NULL, 1, 1, '2018-07-08 05:04:29', 1, 'school_program8.jpeg'),
-(9, '1', NULL, 1, 0, '2018-07-08 05:08:22', 1, NULL),
-(10, '1', NULL, 1, 0, '2018-07-08 05:09:53', 1, 'school_program10.jpg'),
-(11, '1', NULL, 1, 0, '2018-07-08 05:10:31', 1, NULL),
-(12, '10 FLOORS PROJECT', NULL, 1, 1, '2018-07-08 05:10:56', 1, NULL),
-(13, '10 FLOORS PROJECT', NULL, 1, 1, '2018-07-08 05:11:30', 1, NULL),
-(14, '10 FLOORS PROJECT', NULL, 1, 1, '2018-07-08 05:12:53', 1, 'event14.jpg'),
-(15, 'Google Translate', '<p>1</p>', 1, 1, '2018-07-08 05:13:20', 1, 'event15.jpg'),
-(16, 'hello world', '<p>1</p>', 1, 1, '2018-07-08 05:14:00', 1, 'event16.jpeg');
+INSERT INTO `school_programs` (`id`, `title`, `description`, `school_id`, `active`, `create_at`, `program_category`, `featured_image`, `owner_id`) VALUES
+(1, 'Test', '<p><span style=\"color:#c0392b\">Test</span></p>', 3, 0, '2018-04-07 04:52:58', 2, '', 0),
+(2, 'Test', '<p>test</p>', 1, 0, '2018-05-06 04:14:15', 1, '', 0),
+(3, 'test', '<p>test</p>', 3, 0, '2018-05-06 04:14:29', 3, '', 0),
+(4, 'test', '<p>test</p>\r\n\r\n<p>&nbsp;</p>', 2, 1, '2018-05-06 04:34:36', 1, '', 0),
+(5, 'test', NULL, 1, 0, '2018-05-06 04:48:31', 1, '', 0),
+(6, 'Computer Science and Engineering', '<p>Sample description here...</p>', 1, 0, '2018-05-21 08:14:01', 1, 'school_program6.jpg', 0),
+(7, 'te', NULL, 1, 1, '2018-07-08 05:02:46', 1, 'school_program7.jpg', 0),
+(8, 'te', NULL, 1, 1, '2018-07-08 05:04:29', 1, 'school_program8.jpeg', 0),
+(9, '1', NULL, 1, 0, '2018-07-08 05:08:22', 1, NULL, 0),
+(10, '1', NULL, 1, 0, '2018-07-08 05:09:53', 1, 'school_program10.jpg', 0),
+(11, '1', NULL, 1, 0, '2018-07-08 05:10:31', 1, NULL, 0),
+(12, '10 FLOORS PROJECT', NULL, 1, 1, '2018-07-08 05:10:56', 1, NULL, 0),
+(13, '10 FLOORS PROJECT', NULL, 1, 1, '2018-07-08 05:11:30', 1, NULL, 0),
+(14, '10 FLOORS PROJECT', NULL, 1, 1, '2018-07-08 05:12:53', 1, 'event14.jpg', 0),
+(15, 'Google Translate', '<p>1</p>', 1, 1, '2018-07-08 05:13:20', 1, 'event15.jpg', 0),
+(16, 'hello world', '<p>1</p>', 1, 1, '2018-07-08 05:14:00', 1, 'event16.jpeg', 0),
+(17, 'eghjkl;Vichey', '<p>Testdsd</p>', 3, 1, '2018-09-22 06:09:09', 2, 'school_program17.jpg', 3),
+(18, 'ទាំង​ល្បី ស្អាត ឆ្លាត តារាថៃទាំង​នេះ​ក៏សុទ្ធមានសំណាងកើត​មក​លើគំនរមាសប្រាក់ដែរ', '<p>srdtyguijokpl[;</p>', 2, 1, '2018-09-22 06:25:30', 4, 'school_program18.jpg', 3),
+(19, 'dfghjk', '<p>xdfghjkl;kjnbjpkṕuiuyfu fkguip</p>', 7, 1, '2018-09-22 06:25:48', 3, 'school_program19.jpg', 3),
+(20, 'wertyuikjnbnmkjghjkkj', '<p>xfgvhbjnkm,.</p>', 7, 1, '2018-09-22 06:26:11', 3, 'school_program20.jpg', 3),
+(21, 'ertyui', '<p>dhjk</p>', 7, 1, '2018-09-22 06:26:46', 3, 'school_program21.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -783,17 +822,19 @@ CREATE TABLE `shops` (
   `active` tinyint(4) NOT NULL DEFAULT '1',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `description` longtext,
-  `payment_method` text
+  `payment_method` text,
+  `shop_ower_id` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `shops`
 --
 
-INSERT INTO `shops` (`id`, `name`, `shop_category`, `address`, `phone`, `email`, `website`, `logo`, `shop_owner`, `active`, `create_at`, `description`, `payment_method`) VALUES
-(1, 'Kohdaj Shop', 1, 'Phnom Penh, Cambodia', '086 397 627', 'info@kohdaj.com', 'www.kohdaj.com', '1logo-mtc.jpg', 1, 1, '2018-04-07 03:15:53', '<p>Test</p>', 'ABA Account: 000223964, Name: HENG Vongkol'),
-(2, 'Kara Online Shop', 1, NULL, NULL, NULL, NULL, '2mtc-logo.jpg', 1, 1, '2018-05-06 08:13:08', NULL, NULL),
-(3, 'Online Shop Cambodia', 1, NULL, NULL, NULL, NULL, '3default.png', 1, 1, '2018-05-07 03:05:48', NULL, NULL);
+INSERT INTO `shops` (`id`, `name`, `shop_category`, `address`, `phone`, `email`, `website`, `logo`, `shop_owner`, `active`, `create_at`, `description`, `payment_method`, `shop_ower_id`) VALUES
+(1, 'Kohdaj Shop', 1, 'Phnom Penh, Cambodia', '086 397 627', 'info@kohdaj.com', 'www.kohdaj.com', '1logo-mtc.jpg', 1, 1, '2018-04-07 03:15:53', '<p>Test</p>', 'ABA Account: 000223964, Name: HENG Vongkol', 0),
+(2, 'Kara Online Shop', 1, NULL, NULL, NULL, NULL, '2mtc-logo.jpg', 1, 1, '2018-05-06 08:13:08', NULL, NULL, 0),
+(3, 'Online Shop Cambodia', 1, NULL, NULL, NULL, NULL, '3default.png', 1, 1, '2018-05-07 03:05:48', NULL, NULL, 0),
+(4, 'hello', 1, 'Address', '010298383', 'sorvichey@gmail.com', 'www.abc.com', 'logo204.JPG', 3, 1, '2018-09-20 15:11:02', '<p>Test</p>', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -857,7 +898,7 @@ CREATE TABLE `shop_owners` (
 --
 
 INSERT INTO `shop_owners` (`id`, `first_name`, `last_name`, `gender`, `email`, `phone`, `photo`, `address`, `username`, `password`, `is_verified`, `active`, `create_at`, `type`, `post_product`, `post_company`, `post_school`, `post_event`, `post_review`, `post_transfer`) VALUES
-(3, 'HENG', 'Vongkol', 'Male', 'hengvongkol@gmail.com', '234234', 'default.png', NULL, 'vongkol', '$2y$10$YIboa9mGeRUg8PRa4SGkLOlw6LejYgP226f5vLPu83f8kB3GxwRUq', 1, 1, '2018-09-09 11:52:29', 'Shop Owner', 1, 0, 1, 1, 0, 0);
+(3, 'HENG', 'Vongkol', 'Male', 'hengvongkol@gmail.com', '234234', 'default.png', NULL, 'vongkol', '$2y$10$YIboa9mGeRUg8PRa4SGkLOlw6LejYgP226f5vLPu83f8kB3GxwRUq', 1, 1, '2018-09-09 11:52:29', 'Shop Owner', 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1147,7 +1188,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `business_transfers`
 --
 ALTER TABLE `business_transfers`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `business_types`
@@ -1165,7 +1206,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `company_categories`
@@ -1189,7 +1230,7 @@ ALTER TABLE `customer_histories`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `event_categories`
@@ -1225,7 +1266,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `product_categories`
@@ -1273,7 +1314,7 @@ ALTER TABLE `role_permissions`
 -- AUTO_INCREMENT for table `scholarships`
 --
 ALTER TABLE `scholarships`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `scholarship_categories`
@@ -1285,7 +1326,7 @@ ALTER TABLE `scholarship_categories`
 -- AUTO_INCREMENT for table `schools`
 --
 ALTER TABLE `schools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `school_categories`
@@ -1297,13 +1338,13 @@ ALTER TABLE `school_categories`
 -- AUTO_INCREMENT for table `school_programs`
 --
 ALTER TABLE `school_programs`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `shops`
 --
 ALTER TABLE `shops`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `shop_categories`
