@@ -81,7 +81,9 @@ class EventController extends Controller
             $new_img->save($destinationPath . $file_name, 80);
 
             $destinationPath = 'uploads/events/featured_image/';
-            $new_img = Image::make($file->getRealPath())->resize(1200,600);
+            $new_img = Image::make($file->getRealPath())->resize(1200, null, function ($con) {
+                $con->aspectRatio();
+            });
             $new_img->save($destinationPath . $file_name, 80);
             $data['featured_image'] = $file_name;
            

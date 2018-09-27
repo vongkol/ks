@@ -3,7 +3,7 @@
    <div class="content bg-white">
        <div class="container">
             <p></p>
-            <h3 class="text-primary">My School <a href="{{url('/owner/school/create')}}" class="btn btn-primary btn-xs">New</a></h3>
+            <h3 class="text-primary">My Review <a href="{{url('/owner/review/create')}}" class="btn btn-primary btn-xs">New</a></h3>
             <hr>
             @if(Session::has('sms'))
                 <div class="alert alert-success" role="alert">
@@ -28,37 +28,33 @@
             <table class="table table-bordered table-sm">
                 <thead>
                     <tr>
-                        <th>Event ID</th>
-                        <th>Logo</th>
-                        <th>Khmer Name</th>
-                        <th>English Name</th>
-                        <th>Category</th>
-                        <th>Phone</th>
-                        <th>Email</th>
+                        <th>Review ID</th>
+                        <th>Title</th>
+                        <th>Featured Image</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($schools as $p)
+                    @foreach($reviews as $p)
                     <tr>
                         <td>{{$p->id}}</td>
+                        <td>{{$p->title}}</td>
+                
                         <td>
-                            <img src="{{asset('uploads/schools/logo/'.$p->logo)}}" alt="Photo" width="70">
+                        @if($p->featured_image != null)
+                            <img src="{{asset('uploads/reviews/featured_image/small/'.$p->featured_image)}}" alt="Photo" width="54">
+                        @else
+                             <img src="{{asset('uploads/reviews/default.png')}}" alt="Photo" width="54">
+                        @endif
                         </td>
-                        <td>{{$p->name_khmer}}</td>
-                        <td>{{$p->name_english}}</td>
-                        <td>{{$p->cname}}</td>
-                        <td>{{$p->phone}}</td>
-                        <td>{{$p->email}}</td>
                         <td>
-                            <a href="{{url('/owner/school/edit/'.$p->id)}}" class="btn btn-link text-success" title="Edit"><i class="fa fa-edit"></i></a>
-                            <a href="{{url('/owner/school/delete/'.$p->id)}}" class="btn btn-link text-danger" onclick="return confirm('You want to delete?')" title="Delete"><i class="fa fa-trash"></i></a>
+                            <a href="{{url('/owner/review/edit/'.$p->id)}}" class="btn btn-link text-success" title="Edit"><i class="fa fa-edit"></i></a>
+                            <a href="{{url('/owner/review/delete/'.$p->id)}}" class="btn btn-link text-danger" onclick="return confirm('You want to delete?')" title="Delete"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-            {{$schools->links()}}
        </div>
    </div>
 @endsection

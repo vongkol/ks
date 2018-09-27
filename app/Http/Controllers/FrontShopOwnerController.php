@@ -1450,4 +1450,161 @@ EOT;
             
         return view('fronts.owners.company', $data);
     }
+
+    public function review(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['reviews'] = DB::table('reviews')
+            ->join('review_categories', 'reviews.category_id', 'review_categories.id')
+            ->where('reviews.review_by', $user->id)
+            ->where('reviews.active', 1)
+            ->orderBy('reviews.id', 'desc')
+            ->select('reviews.*', 'review_categories.name as cname')
+            ->paginate(20);
+        return view('fronts.owners.review', $data);
+    }
+
+    public function create_review(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['categories'] = DB::table('review_categories')
+            ->orderBy('name')
+            ->where('active',1)
+            ->get();
+        return view('fronts.owners.create-review', $data);
+    }
+
+    public function save_review(Request $request)
+    {
+        $user = $request->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+
+        $data = array(
+            "title" => $request->title,
+            "description1" => $request->description1,
+            "description2" => $request->description2,
+            "category_id" => $request->category,
+            "review_by" => $user->id
+        );
+        $i = DB::table('reviews')->insertGetId($data);
+        if($request->hasFile('featured_image'))
+        {
+            $file = $request->file('featured_image');
+            $file_name = $file->getClientOriginalName();
+            $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
+            $file_name = 'review' .$i . $ss;
+            // dd($file_name);
+            // upload 350
+            $destinationPath = 'uploads/reviews/featured_image/small/';
+            $new_img = Image::make($file->getRealPath())->resize(350, null, function ($con) {
+                $con->aspectRatio();
+            });
+            $new_img->save($destinationPath . $file_name, 80);
+
+            $destinationPath = 'uploads/reviews/';
+            $new_img =  Image::make($file->getRealPath())->resize(1200, null, function ($con) {
+                $con->aspectRatio();
+            });
+            $new_img->save($destinationPath . $file_name, 80);
+
+            $data['featured_image'] = $file_name;
+        }
+        $i = DB::table('reviews')->where('id', $i)->update($data);
+        if ($i)
+        {
+            $request->session()->flash("sms", "New reviews has been created successfully!");
+            return redirect("/owner/review/create");
+        }
+        else
+        {
+            $request->session()->flash("sms1", "Fail to create new reviews!");
+            return redirect("/owner/review/create")->withInput();
+        }
+    }
+    public function delete_review(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        DB::table('reviews')->where('id', $r->id)->update(["active"=>0]);
+        return redirect('/owner/review');
+    }
+    public function edit_review(Request $r)
+    {
+        $user = $r->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+        $data['review'] = DB::table('reviews')
+            ->where('id', $r->id)
+            ->first();
+        $data['categories'] = DB::table('review_categories')
+            ->orderBy('name')
+            ->where('active',1)
+            ->get();
+        return view('fronts.owners.edit-review', $data);
+    }
+
+    public function update_review(Request $request)
+    {
+        $user = $request->session()->get('user');
+        if($user==null)
+        {
+            return redirect('/shop-owner/login');
+        }
+
+        $data = array(
+            "title" => $request->title,
+            "description1" => $request->description1,
+            "description2" => $request->description2,
+            "category_id" => $request->category,
+            "review_by" => $user->id
+        );
+        if($request->hasFile('featured_image'))
+        {
+            $file = $request->file('featured_image');
+            $file_name = $file->getClientOriginalName();
+            $ss = substr($file_name, strripos($file_name, '.'), strlen($file_name));
+            $file_name = 'review' .$request->id . $ss;
+            // upload 350
+            $destinationPath = 'uploads/reviews/featured_image/small/';
+            $new_img = Image::make($file->getRealPath())->resize(350, null, function ($con) {
+                $con->aspectRatio();
+            });
+            $new_img->save($destinationPath . $file_name, 80);
+
+            $destinationPath = 'uploads/reviews/';
+            $new_img =  Image::make($file->getRealPath())->resize(1200, null, function ($con) {
+                $con->aspectRatio();
+            });
+            $new_img->save($destinationPath . $file_name, 80);
+
+            $data['featured_image'] = $file_name;
+        }
+        $i = DB::table('reviews')->where('id', $request->id)->update($data);
+        if ($i)
+        {
+            $request->session()->flash("sms", "New reviews has been created successfully!");
+            return redirect("/owner/review/edit/".$request->id);
+        }
+        else
+        {
+            $request->session()->flash("sms1", "Fail to create new reviews!");
+            return redirect("/owner/review/create/".$request->id);
+        }
+    }
 }

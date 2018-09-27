@@ -173,7 +173,7 @@
                                         @endif
                                         @if(session('user')->post_review==1)
                                             <li>
-                                                <a href="#">Post Review</a>
+                                            <a href="{{url('/owner/review')}}">Post Review</a>
                                             </li>
                                         @endif
                                         @if(session('user')->post_transfer==1)
