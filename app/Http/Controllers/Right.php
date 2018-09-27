@@ -42,9 +42,9 @@ class Right
             $mail->SMTPSecure = "ssl"; // or ssl
             $mail->Host = "gator4170.hostgator.com";
             $mail->Port = 465; 
-            $mail->Username = "sales@bill-trade.com";
+            $mail->Username = "ks@vdoo.biz";
             $mail->Password = "Khmer@123";
-            $mail->setFrom("sales@bill-trade.com", "KSPage");
+            $mail->setFrom("ks@vdoo.biz", "KSPage");
             $mail->Subject = "Confirm Your Registration";
             $mail->MsgHTML($message);
             $mail->addAddress($to, $to);
@@ -91,9 +91,9 @@ class Right
             $mail->SMTPSecure = "ssl"; // or ssl
             $mail->Host = "gator4170.hostgator.com";
             $mail->Port = 465; // most likely something different for you. This is the mailtrap.io port i use for testing.
-            $mail->Username = "sales@bill-trade.com";
+            $mail->Username = "ks@vdoo.bizsales@bill-trade.com";
             $mail->Password = "Khmer@123";
-            $mail->setFrom("sales@bill-trade.com", "sales@bill-trade.com");
+            $mail->setFrom("ks@vdoo.biz", "ks@vdoo.biz");
             $mail->Subject = "Reset Your Password";
             $mail->MsgHTML("<p>Please click the link below to reset your password.</p><p><a href='{$a}'>{$a}</a></p>");
             $mail->addAddress($send_to, $send_to);
